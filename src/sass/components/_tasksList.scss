@@ -1,0 +1,45 @@
+.item {
+    display: flex;
+    align-items: center;
+   
+
+    & > * {
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        background-color: $color-light;
+        flex: 0 0 auto;
+    }
+
+    &__checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    &__urgency {
+        
+    }
+
+    &__name {
+        flex: 1 1 auto;
+    }
+
+    &__tags {
+        
+    }
+
+    &__dateFrom,
+    &__dateUntil {
+        
+    }
+
+    &__daysRemaining {
+        
+    }
+
+    &__delete,
+    &__edit {
+        
+    }
+    
+
+}

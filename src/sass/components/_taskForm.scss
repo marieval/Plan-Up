@@ -1,0 +1,37 @@
+.taskForm {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    
+    & > * {
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+  
+    &__name {
+        margin-left: 0;
+    }
+
+    &__tag {
+        
+    }
+
+    &__person {
+        
+    }
+
+    &__date--until {
+        
+    }
+
+    &__urgency {
+        
+    }
+
+    &__add-btn {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+

@@ -4,18 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Plan-up</title>
 </head>
 <body>
 
 	<div class="heading">
-        <h1>Plan-Up</h1>
-        <h2 class="subheading">To-Do List</h2>
+        <h1 class="heading__top">Plan-Up</h1>
+        <h2 class="heading__sub">To-Do List</h2>
     </div>
 
+	 <div class="main-div">
+        <div class="taskForm">
+            <input type="text" class="taskForm__name" placeholder="Task name">
+            <input type="text" class="taskForm__tag" placeholder="Tags">
+            <input type="text" class="taskForm__person" placeholder="Person">
+            
+            <input type="date" class="taskForm__date--until" placeholder="Add tag">
+            <input type="number" class="taskForm__urgency" placeholder="Urgency (0-9)" min="0" max="9">
+
+            <button class="btn taskForm__add-btn">Add</button>
+        </div>
+
+        <div class="tasks-list">
+
+            <div class="item">                
+                <div class="item__checkbox">
+                    <input class="item__checkbox--btn" type="checkbox" name="done"></input>
+                    <label for="done">Done</label>
+                </div>
+                <div class="item__urgency">8</div>
+                <div class="item__name">Do the shopping</div>
+                <div class="item__tags">Out</div>
+                <div class="item__dateFrom">Monday 1.1.2019</div>
+                <div class="item__dateUntil">Friday 16.1.2019</div>
+                <div class="item__daysRemaining">15 days</div>
+                <div class="item__delete">
+                    <button class="item__delete--btn">Delete</button>
+                </div>
+                <div class="item__edit">
+                    <button class="item__edit--btn">Edit</button>
+                </div>
+            </div>
+
+            <div class="item">                
+                    <div class="item__checkbox">
+                        <input class="item__checkbox--btn" type="checkbox" name="done"></input>
+                        <label for="done">Done</label>
+                    </div>
+                    <div class="item__urgency">8</div>
+                    <div class="item__name">Do the shopping</div>
+                    <div class="item__tags">Out</div>
+                    <div class="item__dateFrom">Monday 1.1.2019</div>
+                    <div class="item__dateUntil">Friday 16.1.2019</div>
+                    <div class="item__daysRemaining">15 days</div>
+                    <div class="item__delete">
+                        <button class="item__delete--btn">Delete</button>
+                    </div>
+                    <div class="item__edit">
+                        <button class="item__edit--btn">Edit</button>
+                    </div>
+                </div>
+
+            <div class="item">                
+                <div class="item__checkbox">
+                    <input class="item__checkbox--btn" type="checkbox" name="done"></input>
+                    <label for="done">Done</label>
+                </div>
+                <div class="item__urgency">8</div>
+                <div class="item__name">Do the shopping</div>
+                <div class="item__tags">Out</div>
+                <div class="item__dateFrom">Monday 1.1.2019</div>
+                <div class="item__dateUntil">Friday 16.1.2019</div>
+                <div class="item__daysRemaining">15 days</div>
+                <div class="item__delete">
+                    <button class="item__delete--btn">Delete</button>
+                </div>
+                <div class="item__edit">
+                    <button class="item__edit--btn">Edit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
        
-        <script src="main.js"></script>
+    <script src="main.js"></script>
     
 </body>
 </html>

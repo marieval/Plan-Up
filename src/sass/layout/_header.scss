@@ -1,5 +1,14 @@
-.header {
-    background-color: blue;
-    color: white;
-    height: 5rem;
+.heading {
+    margin: 2rem;
+    text-align: center;
+
+    &__top {
+        font-size: 5rem;
+        font-weight: 400;
+    }
+
+    &__sub {
+        font-size: 3rem;
+        font-weight: 400;
+    }
 }

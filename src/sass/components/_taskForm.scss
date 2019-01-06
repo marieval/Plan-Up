@@ -1,16 +1,18 @@
 .taskForm {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin: 3rem 0.5rem;
+    width: 100%;
     display: flex;
     align-items: center;
     
     & > * {
         margin-left: 0.75rem;
         padding: 0.25rem 0.5rem;
+        flex: 0 1 auto;
     }
   
     &__name {
         margin-left: 0;
+        flex: 1 1 auto;
     }
 
     &__tag {

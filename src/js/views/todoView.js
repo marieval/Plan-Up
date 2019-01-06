@@ -22,7 +22,8 @@ export const deleteItem = id => {
     if (todoItem) todoItem.parentElement.removeChild(todoItem);
 }
 
-export const clearInput = () => {    
+export const clearInput = () => {  
+    // console.log("ClearInput called");  
     elements.taskName.value = "",
     elements.taskTag.value = "",
     elements.taskPerson.value = "",

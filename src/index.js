@@ -35,11 +35,15 @@ const addToTodoList = () => {
     // CREATE A NEW TODO-LIST IF THERE IS NONE YET
     if (!state.todoList) state.todoList = new TodoList();  
 
+    // FORMAT THE DATE FROM INPUT TO TIMESTAMP:
+    const dateUntil = new Date(elements.taskUntil.value);
+    const timestampUntil = dateUntil.getTime();
+
     // ADD ITEM-OBJECT TO STATE-ARRAY:
     state.todoList.addTodoItem(elements.taskName.value,
         elements.taskTag.value, 
         elements.taskPerson.value,
-        elements.taskUntil.value,
+        timestampUntil,
         elements.taskUrgency.value
     );    
     const todoListLength = state.todoList.todoItems.length;

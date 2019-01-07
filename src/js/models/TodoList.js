@@ -10,14 +10,14 @@ export default class TodoList {
 
     addTodoItem(name, tag, person, until, urgency) {
         const randomNo = Math.random();
-        
+       
         const todoItem = {
             /* id: uniqid(), */
             id: randomNo,
             name,
             tag, 
             person,
-            from: "19-1-1999",
+            from: new Date().getTime(),
             until,
             urgency
         }
@@ -27,7 +27,6 @@ export default class TodoList {
     }
 
     deleteTodoItem(id) {
-        console.log("deleteTodo called");
         const index = this.todoItems.findIndex(el => el.id === id);
         this.todoItems.splice(index, 1);
         

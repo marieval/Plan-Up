@@ -3,7 +3,8 @@
     display: flex;
     align-items: center;
     background-color: rgba($color-light, 0.2);
-    margin: 0.5rem;
+    width: 100%;
+    margin: 0.5rem 0;
 
     & > * {
         margin-left: 0.75rem;
@@ -23,25 +24,26 @@
     }
 
     &__name {
-        flex: 1 1 auto;
+        flex: 1 1 35%;
     }
 
     &__tags {
-        
+        flex: 0 1 15%;
     }
 
     &__dateFrom,
     &__dateUntil {
-        
+        flex: 0 1 10%;
     }
 
     &__daysRemaining {
-        
+        flex: 0 1 10%;
     }
 
     &__delete--btn,
     &__edit--btn {
-        
+        background-color: $color-tertiary;
+
     }
     
 

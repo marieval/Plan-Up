@@ -48,18 +48,21 @@ const addToTodoList = () => {
     );    
     const todoListLength = state.todoList.todoItems.length;
     todoView.renderTodoItem(state.todoList.todoItems[todoListLength - 1]);
+
 }
 
 // FUNCTION TRIGGERED AFTER PUSHING THE DELETE-ITEM-BUTTON:
 const removeFromTodoList = id => {
     state.todoList.deleteTodoItem(id);
-    todoView.deleteItem(id);        
-}
+    todoView.deleteItem(id);  
+} 
 
 // INITIALIZATION FUNCTION:
 const init = () => {
     console.log("App has started");
+ 
     setupEventListeners();
+
     todoView.clearInput();
 }
 

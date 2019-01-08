@@ -32,6 +32,15 @@ export default class TodoList {
         
     }
 
+/*     persistData() {
+        localStorage.setItem("todoItems", JSON.stringify(this.todoItems));
+    }
+
+    readStorage() {
+        const storage = JSON.parse(localStorage.getItem("todoList"));
+        if (storage) this.todoList = storage;
+    } */
+
     
 }
 

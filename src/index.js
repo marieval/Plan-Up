@@ -6,7 +6,7 @@ import "./sass/main.scss";
 import { elements } from "./js/views/base";
 import TodoList from "./js/models/TodoList";
 import * as todoView from "./js/views/todoView";
- 
+
 const state = {
 };
 
@@ -15,11 +15,11 @@ const setupEventListeners = () => {
 
     // REACTION ON CLICKING THE ADD-BTN:
     elements.addBtn.addEventListener("click", () => {
-        addToTodoList();       
+        addToTodoList();
         todoView.clearInput();
     });
 
-    // REACTION ON CLICKING THE DEL-BTN and EDIT-BTN:
+    // REACTION ON CLICKING THE DEL-BTN or EDIT-BTN or CHECKBOX
     elements.tasksList.addEventListener("click", e => {
         if (e.target.matches(".item__delete--btn")) {
             const tagId = e.target.parentElement.dataset.itemid;
@@ -27,13 +27,23 @@ const setupEventListeners = () => {
 
         } else if (e.target.matches(".item__edit--btn")) {
             console.log("edit-btn pressed")
-        }       
+            // MOVE TO DONE-LIST WHEN CHECKBOX IS CHECKED:
+        } else if (e.target.matches(".item__checkbox--btn")) {
+            if (e.target.checked) {
+                console.log("checkbox is checked");
+                console.log(state);
+                moveToDone();
+            } else {
+                console.log("checkbox is NOT checked");
+            }
+        }
     })
+
 }
 
 const addToTodoList = () => {
     // CREATE A NEW TODO-LIST IF THERE IS NONE YET
-    if (!state.todoList) state.todoList = new TodoList();  
+    if (!state.todoList) state.todoList = new TodoList();
 
     // FORMAT THE DATE FROM INPUT TO TIMESTAMP:
     const dateUntil = new Date(elements.taskUntil.value);
@@ -41,26 +51,32 @@ const addToTodoList = () => {
 
     // ADD ITEM-OBJECT TO STATE-ARRAY:
     state.todoList.addTodoItem(elements.taskName.value,
-        elements.taskTag.value, 
+        elements.taskTag.value,
         elements.taskPerson.value,
         timestampUntil,
         elements.taskUrgency.value
-    );    
+    );
     const todoListLength = state.todoList.todoItems.length;
-    todoView.renderTodoItem(state.todoList.todoItems[todoListLength - 1]);
 
+    const newMarkup = todoView.renderTodoItem(state.todoList.todoItems[todoListLength - 1]);
+    elements.tasksList.insertAdjacentHTML("beforeend", newMarkup);
 }
+const moveToDone = () => {
+    console.log("move");
+}
+
+
 
 // FUNCTION TRIGGERED AFTER PUSHING THE DELETE-ITEM-BUTTON:
 const removeFromTodoList = id => {
     state.todoList.deleteTodoItem(id);
-    todoView.deleteItem(id);  
-} 
+    todoView.deleteItem(id);
+}
 
 // INITIALIZATION FUNCTION:
 const init = () => {
     console.log("App has started");
- 
+
     setupEventListeners();
 
     todoView.clearInput();

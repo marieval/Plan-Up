@@ -26,12 +26,13 @@ export const renderTodoItem = (todoItem) => {
             <div class="item__tags">${todoItem.tag}</div>
             <div class="item__dateFrom">${dayFrom}</div>
             <div class="item__dateUntil">${dayUntil}</div>
-            <div class="item__daysRemaining">${daysBetween}</div>
+            <div class="item__daysRemaining">${daysBetween} days</div>
             <button class="item__delete--btn">Delete</button>
             <button class="item__edit--btn">Edit</button>
         </div>    
     `;
-    elements.tasksList.insertAdjacentHTML("beforeend", markup);
+    return markup;
+    // elements.todoItems.insertAdjacentHTML("beforeend", markup);
 }
 
 export const deleteItem = id => {

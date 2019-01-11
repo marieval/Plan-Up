@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,64 +9,67 @@
     <link rel="stylesheet" href="style.css">
     <title>Plan-up</title>
 </head>
+
 <body>
 
-	<div class="heading">
+    <div class="heading">
         <h1 class="heading__top">Plan-Up</h1>
         <h2 class="heading__sub">To-Do List</h2>
     </div>
 
-	 <div class="main-div">
+    <div class="main-div">
         <div class="taskForm">
 
             <div class="taskForm__name">
                 <svg class="taskForm__icon taskForm__task-icon">
                     <use xlink:href="img/sprite.svg#icon-news"></use>
                 </svg>
-                <input type="text" class="taskForm__input"  id="taskName" placeholder="Task name" size="5">
+                <input type="text" class="taskForm__input" id="taskName" placeholder="Task name" size="5">
 
             </div>
 
-            <div class="taskForm__tag" >
+            <div class="taskForm__tag">
                 <svg class="taskForm__icon taskForm__tag-icon">
                     <use xlink:href="img/sprite.svg#icon-price-tag"></use>
                 </svg>
-                <input type="text" class="taskForm__input" id="taskTag"  placeholder="Tags" size="2">
+                <input type="text" class="taskForm__input" id="taskTag" placeholder="Tags" size="2">
             </div>
 
             <div class="taskForm__person">
                 <svg class="taskForm__icon taskForm__person-icon">
                     <use xlink:href="img/sprite.svg#icon-users"></use>
                 </svg>
-                <input type="text" class="taskForm__input"  id="taskPerson"  placeholder="Person"  size="2">
+                <input type="text" class="taskForm__input" id="taskPerson" placeholder="Person" size="2">
             </div>
 
-            <div class="taskForm__date--until" >
+            <div class="taskForm__date--until">
                 <svg class="taskForm__icon taskForm__until-icon">
                     <use xlink:href="img/sprite.svg#icon-calendar"></use>
-                </svg>            
-                <input type="date" class="taskForm__input taskForm__input--until"  id="taskUntil" placeholder="Until"  size="2">
+                </svg>
+                <input type="date" class="taskForm__input taskForm__input--until" id="taskUntil" placeholder="Until"
+                    size="2">
             </div>
 
-            <div class="taskForm__urgency" >
+            <div class="taskForm__urgency">
                 <svg class="taskForm__icon taskForm__urgency-icon">
                     <use xlink:href="img/sprite.svg#icon-new"></use>
                 </svg>
-                <input type="number" class="taskForm__input taskForm__input--urgency"  id="taskUrgency" placeholder="Urgency" min="0" max="9"  size="2">
+                <input type="number" class="taskForm__input taskForm__input--urgency" id="taskUrgency" placeholder="Urgency"
+                    min="0" max="9" size="2">
             </div>
 
             <div class="taskForm__add-btn">
                 <svg class="taskForm__icon taskForm__add-icon">
                     <use xlink:href="img/sprite.svg#icon-circle-with-plus"></use>
                 </svg>
-                <button class="btn" class="taskForm__input"  id="addBtn">Add</button>
+                <button class="btn" class="taskForm__input" id="addBtn">Add</button>
             </div>
         </div>
 
         <div class="tasks-list">
             <h3>To-Do:</h3>
-            <div class="item">  
-                <input class="item__checkbox--btn" type="checkbox" name="done"></input>              
+            <div class="item">
+                <input class="item__checkbox--btn" type="checkbox" name="done"></input>
                 <div class="item__urgency">8</div>
                 <div class="item__name">Do the shopping</div>
                 <div class="item__tags">Out</div>
@@ -74,7 +78,7 @@
                 <div class="item__daysRemaining">1000 days</div>
                 <button class="item__delete--btn">Delete</button>
                 <button class="item__edit--btn">Edit</button>
-                
+
             </div>
 
             <!--  <div class="item">                
@@ -88,12 +92,10 @@
                 <div class="item__daysRemaining">15 days</div>
                 <button class="item__delete--btn">Delete</button>
                 <button class="item__edit--btn">Edit</button>
-              
             </div>
 
             <div class="item">                
                 <input class="item__checkbox--btn" type="checkbox" name="done"></input>
-              
                 <div class="item__urgency">8</div>
                 <div class="item__name">Do the shopping</div>
                 <div class="item__tags">Out</div>
@@ -109,23 +111,24 @@
 
         <div class="done-list">
             <h3>Done:</h3>
-                <div class="item">                
-                        <input class="item__checkbox--btn" type="checkbox" name="done" checked></input>
-                        
-                        <div class="item__urgency">8</div>
-                        <div class="item__name">Do the shopping</div>
-                        <div class="item__tags">Out</div>
-                        <div class="item__dateFrom">1.1.1111</div>
-                        <div class="item__dateUntil">16.12.2222</div>
-                        <div class="item__daysRemaining">1000 days</div>
-                        <button class="item__delete--btn">Delete</button>
-                        <button class="item__edit--btn">Edit</button>
-                      
-                    </div>
+            <div class="item">
+                <input class="item__checkbox--btn" type="checkbox" name="done" checked></input>
+
+                <div class="item__urgency">8</div>
+                <div class="item__name">Do the shopping</div>
+                <div class="item__tags">Out</div>
+                <div class="item__dateFrom">1.1.1111</div>
+                <div class="item__dateUntil">16.12.2222</div>
+                <div class="item__daysRemaining">1000 days</div>
+                <button class="item__delete--btn">Delete</button>
+                <button class="item__edit--btn">Edit</button>
+
+            </div>
         </div>
     </div>
-       
+
     <script src="main.js"></script>
-    
+
 </body>
+
 </html>

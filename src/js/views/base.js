@@ -5,8 +5,8 @@ export const elements = {
     taskPerson: document.querySelector("#taskPerson"),
     taskUntil: document.querySelector("#taskUntil"),
     taskUrgency: document.querySelector("#taskUrgency"),
-    tasksList: document.querySelector(".tasks-list")
-    
+    tasksList: document.querySelector(".tasks-list"),
+    doneList: document.querySelector(".done-list")
 }
 
 

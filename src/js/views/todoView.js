@@ -1,7 +1,7 @@
- import { elements } from "./base";
- 
- export const getDaysDifference = (from, until) => {
-    const diffDays = Math.ceil(Math.abs((from - until) / (24*60*60*1000)));    
+import { elements } from "./base";
+
+export const getDaysDifference = (from, until) => {
+    const diffDays = Math.ceil(Math.abs((from - until) / (24 * 60 * 60 * 1000)));
     return diffDays;
 }
 
@@ -17,7 +17,7 @@ export const getDate = (timestamp) => {
 export const renderTodoItem = (todoItem) => {
     const dayFrom = getDate(todoItem.from);
     const dayUntil = getDate(todoItem.until);
-    const daysBetween = getDaysDifference(todoItem.from, todoItem.until);
+    const daysBetween = getDaysDifference((new Date().getTime()), todoItem.until);
     const markup = `
         <div class="item" data-itemid=${todoItem.id}>                
             <input class="item__checkbox--btn" type="checkbox" name="done"></input>
@@ -30,7 +30,7 @@ export const renderTodoItem = (todoItem) => {
             <button class="item__delete--btn">Delete</button>
             <button class="item__edit--btn">Edit</button>
         </div>    
-    `; 
+    `;
     elements.tasksList.insertAdjacentHTML("beforeend", markup);
 }
 
@@ -39,11 +39,11 @@ export const deleteItem = id => {
     if (todoItem) todoItem.parentElement.removeChild(todoItem);
 }
 
-export const clearInput = () => {  
+export const clearInput = () => {
     // console.log("ClearInput called");  
     elements.taskName.value = "",
-    elements.taskTag.value = "",
-    elements.taskPerson.value = "",
-    elements.taskUntil.value = "",
-    elements.taskUrgency.value = ""
+        elements.taskTag.value = "",
+        elements.taskPerson.value = "",
+        elements.taskUntil.value = "",
+        elements.taskUrgency.value = ""
 }

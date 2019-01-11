@@ -10,18 +10,18 @@ export default class TodoList {
 
     addTodoItem(name, tag, person, until, urgency) {
         const randomNo = Math.random();
-       
+
         const todoItem = {
             /* id: uniqid(), */
             id: randomNo,
             name,
-            tag, 
+            tag,
             person,
             from: new Date().getTime(),
             until,
             urgency
         }
-        
+
         this.todoItems.push(todoItem);
         return todoItem;
     }
@@ -29,19 +29,18 @@ export default class TodoList {
     deleteTodoItem(id) {
         const index = this.todoItems.findIndex(el => el.id === id);
         this.todoItems.splice(index, 1);
-        
+
     }
 
-/*     persistData() {
-        localStorage.setItem("todoItems", JSON.stringify(this.todoItems));
-    }
-
-    readStorage() {
-        const storage = JSON.parse(localStorage.getItem("todoList"));
-        if (storage) this.todoList = storage;
-    } */
-
+    /*     persistData() {
+            localStorage.setItem("todoItems", JSON.stringify(this.todoItems));
+        }
     
+        readStorage() {
+            const storage = JSON.parse(localStorage.getItem("todoList"));
+            if (storage) this.todoList = storage;
+        } */
+
+
 }
 
- 

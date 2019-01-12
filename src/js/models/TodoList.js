@@ -29,7 +29,6 @@ export default class TodoList {
     deleteTodoItem(id) {
         const index = this.todoItems.findIndex(el => el.id === id);
         this.todoItems.splice(index, 1);
-
     }
 
     /*     persistData() {

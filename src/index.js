@@ -19,22 +19,29 @@ const setupEventListeners = () => {
         todoView.clearInput();
     });
 
-    // REACTION ON CLICKING THE DEL-BTN or EDIT-BTN or CHECKBOX
+    // REACTION ON CLICKING BUTTONS / CHECKBOX
     elements.tasksList.addEventListener("click", e => {
+
+        // REACTION ON CLICKING THE DEL-BTN 
         if (e.target.matches(".item__delete--btn")) {
             const tagId = e.target.parentElement.dataset.itemid;
             removeFromTodoList(tagId);
 
+            // REACTION ON CLICKING THE EDIT-BTN 
         } else if (e.target.matches(".item__edit--btn")) {
             console.log("edit-btn pressed")
+
             // MOVE TO DONE-LIST WHEN CHECKBOX IS CHECKED:
         } else if (e.target.matches(".item__checkbox--btn")) {
             if (e.target.checked) {
                 console.log("checkbox is checked");
                 console.log(state);
-                moveToDone();
+                moveToDoneList();
+                const tagId = e.target.parentElement.dataset.itemid;
+                removeFromTodoList(tagId);
             } else {
                 console.log("checkbox is NOT checked");
+                console.log(state);
             }
         }
     })
@@ -56,13 +63,42 @@ const addToTodoList = () => {
         timestampUntil,
         elements.taskUrgency.value
     );
-    const todoListLength = state.todoList.todoItems.length;
-
-    const newMarkup = todoView.renderTodoItem(state.todoList.todoItems[todoListLength - 1]);
-    elements.tasksList.insertAdjacentHTML("beforeend", newMarkup);
+    createTodoListMarkup();
 }
-const moveToDone = () => {
-    console.log("move");
+
+const moveToDoneList = () => {
+    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
+    if (!state.doneList) state.doneList = new TodoList();
+    console.log("state.doneList created:");
+    console.log(state);
+
+    const todoListLength = state.todoList.todoItems.length;
+    const newItem = state.todoList.todoItems[todoListLength - 1];
+    console.log("New item: ");
+    console.log(newItem);
+
+    state.doneList.addTodoItem(newItem.name,
+        newItem.tag,
+        newItem.person,
+        newItem.until,
+        newItem.urgency);
+    console.log("state.doneList updated: ");
+    console.log(state.doneList);
+    createDoneListMarkup();
+}
+
+// CREATE THE MARKUP ACCORDING TO STATE-TODOLIST-TODOITEMS[i] AND PUSH IT TO VIEW
+const createTodoListMarkup = () => {
+    const todoListLength = state.todoList.todoItems.length;
+    const addedMarkup = todoView.renderTodoItem(state.todoList.todoItems[todoListLength - 1]);
+    elements.tasksList.insertAdjacentHTML("beforeend", addedMarkup);
+}
+
+// CREATE THE MARKUP ACCORDING TO STATE-DONELIST-TODOITEMS[i] AND PUSH IT TO VIEW
+const createDoneListMarkup = () => {
+    const doneListLength = state.doneList.todoItems.length;
+    const addedMarkup = todoView.renderTodoItem(state.doneList.todoItems[doneListLength - 1]);
+    elements.doneList.insertAdjacentHTML("beforeend", addedMarkup);
 }
 
 
@@ -71,14 +107,13 @@ const moveToDone = () => {
 const removeFromTodoList = id => {
     state.todoList.deleteTodoItem(id);
     todoView.deleteItem(id);
+    console.log(state);
 }
 
 // INITIALIZATION FUNCTION:
 const init = () => {
     console.log("App has started");
-
     setupEventListeners();
-
     todoView.clearInput();
 }
 
@@ -87,11 +122,13 @@ window.addEventListener("load", () => {
     init();
 })
 
-// CONTROLLING CLICKING ADD-BUTTON:
-/* elements.addBtn.addEventListener("click", () => {
-    console.log("clicked");
-}) 
 
-- IS NOT THE SAME AS BELOW??? 
- elements.addBtn.addEventListener("click", console.log("clicked"))
+/*  
+? CONTROLLING CLICKING ADD-BUTTON:
+? elements.addBtn.addEventListener("click", () => {
+?    console.log("clicked");
+?}) 
+
+? IS NOT THE SAME AS BELOW??? 
+? elements.addBtn.addEventListener("click", console.log("clicked"))
 */

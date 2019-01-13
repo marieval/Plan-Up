@@ -52,8 +52,17 @@ const setupEventListeners = () => {
 
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked === false)) {
             let tagId = e.target.parentElement.dataset.itemid;
-            moveToTodoList();
+
+            // CREATE A NEW TODO-LIST IF THERE IS NONE YET
+            if (!state.todoList) state.todoList = new TodoList();
+
+            const newItem = state.doneList.getTodoItem(tagId);  // get copy of the item         
+            switchChecked(newItem); // change CHECKED x UNCHECKED            
+            state.todoList.items.push(newItem); // add to state.todoList
+
+            //moveToTodoList();
             removeFromDoneList(tagId);
+            createTodoListMarkup();
         }
     }
 
@@ -71,17 +80,15 @@ const setupEventListeners = () => {
     )
 }
 
-const moveToDoneList = () => {
+/* const moveToDoneList = () => {
     // CREATE A NEW DONE-LIST IF THERE IS NONE YET
     if (!state.doneList) state.doneList = new TodoList();
     // SELECT THE LAST ITEM FROM THE TODO-LIST
     state.todoList.getTodoItem(id)
-
-
     switchChecked(newItem); // change CHECKED x UNCHECKED
     state.doneList.items.push(newItem); // add to state.doneList
     createDoneListMarkup(); // add the markup to the page
-}
+} */
 
 const addToTodoList = () => {
     // CREATE A NEW TODO-LIST IF THERE IS NONE YET
@@ -108,8 +115,6 @@ const addFromFormToTodoState = () => {
 
 
 const switchChecked = (item) => {
-    console.log("item:");
-    console.log(item);
     if (item.checked === "" || !item.checked) {
         item.checked = "checked";
     } else {

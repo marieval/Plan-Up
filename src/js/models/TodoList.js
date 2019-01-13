@@ -34,11 +34,7 @@ export default class TodoList {
 
     getTodoItem(ID) {
         let extractedItem = this.items.find(obj => obj.id == ID);
-        console.log("+++++ extractedItem: ");
-        console.log(extractedItem);
         return extractedItem;
-        /* const index = this.items.findIndex(el => el.id == ID); // ! doesn´t work with "===". WHY???
-        return this.items.slice(index, index + 1); */
     }
 
     /*     persistData() {

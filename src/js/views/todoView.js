@@ -20,7 +20,7 @@ export const renderTodoItem = (todoItem) => {
     const daysBetween = getDaysDifference((new Date().getTime()), todoItem.until);
     const markup = `
         <div class="item" data-itemid=${todoItem.id}>                
-            <input class="item__checkbox--btn" type="checkbox" name="done"></input>
+            <input class="item__checkbox--btn" type="checkbox" name="done" ${todoItem.checked}></input>
             <div class="item__urgency">${todoItem.urgency}</div>
             <div class="item__name">${todoItem.name}</div>
             <div class="item__tags">${todoItem.tag}</div>
@@ -32,7 +32,7 @@ export const renderTodoItem = (todoItem) => {
         </div>    
     `;
     return markup;
-    // elements.todoItems.insertAdjacentHTML("beforeend", markup);
+    // elements.items.insertAdjacentHTML("beforeend", markup);
 }
 
 export const deleteItem = id => {
@@ -46,7 +46,6 @@ export const getMarkup = id => {
 }
 
 export const clearInput = () => {
-    // console.log("ClearInput called");  
     elements.taskName.value = "",
         elements.taskTag.value = "",
         elements.taskPerson.value = "",

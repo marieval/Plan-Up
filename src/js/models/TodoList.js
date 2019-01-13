@@ -5,10 +5,10 @@ adding new todo-item, deleting todo-item  */
 
 export default class TodoList {
     constructor() {
-        this.todoItems = [];
+        this.items = [];
     }
 
-    addTodoItem(name, tag, person, until, urgency) {
+    addTodoItem(name, tag, person, from, until, urgency) {
         const randomNo = Math.random();
 
         const todoItem = {
@@ -17,22 +17,32 @@ export default class TodoList {
             name,
             tag,
             person,
-            from: new Date().getTime(),
+            from,
             until,
-            urgency
+            urgency,
+            checked: ""
         }
 
-        this.todoItems.push(todoItem);
+        this.items.push(todoItem);
         return todoItem;
     }
 
-    deleteTodoItem(id) {
-        const index = this.todoItems.findIndex(el => el.id === id);
-        this.todoItems.splice(index, 1);
+    deleteTodoItem(ID) {
+        const index = this.items.findIndex(el => el.id == ID); // ! doesn´t work with "===". WHY???
+        this.items.splice(index, 1);
+    }
+
+    getTodoItem(ID) {
+        let extractedItem = this.items.find(obj => obj.id == ID);
+        console.log("+++++ extractedItem: ");
+        console.log(extractedItem);
+        return extractedItem;
+        /* const index = this.items.findIndex(el => el.id == ID); // ! doesn´t work with "===". WHY???
+        return this.items.slice(index, index + 1); */
     }
 
     /*     persistData() {
-            localStorage.setItem("todoItems", JSON.stringify(this.todoItems));
+            localStorage.setItem("items", JSON.stringify(this.items));
         }
     
         readStorage() {

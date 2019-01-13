@@ -26,10 +26,20 @@ const setupEventListeners = () => {
         console.log("other-Btn state:");
         console.log(state);
 
+        console.log("e.target-other-btn:");
+        console.log(e.target);
+
         // REACTION ON CLICKING THE DEL-BTN 
         if (e.target.matches(".item__delete--btn")) {
+            console.log("e.target-del-btn:");
+            console.log(e.target);
+
             const tagId = e.target.parentElement.dataset.itemid;
-            removeFromTodoList(tagId);
+            if (!e.target.checked) {
+                removeFromList(tagId, "todo");
+            } else {
+                removeFromList(tagId, "done");
+            }
 
             // REACTION ON CLICKING THE EDIT-BTN 
         } else if (e.target.matches(".item__edit--btn")) {
@@ -40,68 +50,41 @@ const setupEventListeners = () => {
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked)) {
             const tagId = e.target.parentNode.dataset.itemid;
 
-            // CREATE A NEW DONE-LIST IF THERE IS NONE YET
+            // CREATE A NEW DONE-LIST IF THERE IS NONE YET  // ! can go together with below?
             if (!state.doneList) state.doneList = new TodoList();
 
-            const newItem = state.todoList.getTodoItem(tagId);  // get copy of the item         
-            switchChecked(newItem); // change CHECKED x UNCHECKED            
-            state.doneList.items.push(newItem); // add to state.doneList
-            // moveToDoneList();
-            removeFromTodoList(tagId);
-            createDoneListMarkup();  // add the markup to the page
+            const newItem = state.todoList.getTodoItem(tagId);      // get copy of the item         
+            switchChecked(newItem);     // change CHECKED x UNCHECKED            
+            state.doneList.items.push(newItem);     // add to state.doneList           
+            removeFromList(tagId, "todo");      // remove from the first list
+            createListMarkup("done");       // add the markup and put it to the correct list
 
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked === false)) {
             let tagId = e.target.parentElement.dataset.itemid;
 
-            // CREATE A NEW TODO-LIST IF THERE IS NONE YET
+            // CREATE A NEW TODO-LIST IF THERE IS NONE YET // ! can go together with above?
             if (!state.todoList) state.todoList = new TodoList();
 
-            const newItem = state.doneList.getTodoItem(tagId);  // get copy of the item         
-            switchChecked(newItem); // change CHECKED x UNCHECKED            
+            const newItem = state.doneList.getTodoItem(tagId);      // get copy of the item         
+            switchChecked(newItem);     // change CHECKED x UNCHECKED            
             state.todoList.items.push(newItem); // add to state.todoList
-
-            //moveToTodoList();
-            removeFromDoneList(tagId);
-            createTodoListMarkup();
+            removeFromList(tagId, "done");
+            createListMarkup("todo");
         }
-    }
-
-        /* } else if (e.target.matches(".item__checkbox--btn")) {
-            if (e.target.checked) {
-                let tagId = e.target.parentElement.dataset.itemid;
-                moveToDoneList();
-                removeFromTodoList(tagId);
-            } else if (e.target.checked === false) {
-                let tagId = e.target.parentElement.dataset.itemid;
-                moveToTodoList();
-                removeFromDoneList(tagId);
-            }
-        } */
-    )
+    })
 }
-
-/* const moveToDoneList = () => {
-    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
-    if (!state.doneList) state.doneList = new TodoList();
-    // SELECT THE LAST ITEM FROM THE TODO-LIST
-    state.todoList.getTodoItem(id)
-    switchChecked(newItem); // change CHECKED x UNCHECKED
-    state.doneList.items.push(newItem); // add to state.doneList
-    createDoneListMarkup(); // add the markup to the page
-} */
 
 const addToTodoList = () => {
     // CREATE A NEW TODO-LIST IF THERE IS NONE YET
     if (!state.todoList) state.todoList = new TodoList();
     addFromFormToTodoState();       // add to state.todoList as a new item
-    createTodoListMarkup();     // 
+    createListMarkup("todo");
 }
 
 const addFromFormToTodoState = () => {
-    const dateFrom = new Date().getTime(); // TODAY´S DATE
-    // FORMAT THE DATE FROM INPUT TO TIMESTAMP:
+    const dateFrom = new Date().getTime();
     const dateUntil = new Date(elements.taskUntil.value);
-    const timestampUntil = dateUntil.getTime();
+    const timestampUntil = dateUntil.getTime(); // format the date from input to timestamp
     // ADD ITEM-OBJECT TO STATE-ARRAY:
     state.todoList.addTodoItem(elements.taskName.value,
         elements.taskTag.value,
@@ -112,49 +95,38 @@ const addFromFormToTodoState = () => {
     );
 }
 
-
-
 const switchChecked = (item) => {
     if (item.checked === "" || !item.checked) {
         item.checked = "checked";
     } else {
-        item.checked = ""
+        item.checked = "";
     }
 }
-/* 
-const moveToTodoList = () => {
-    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
-    if (!state.todoList) state.todoList = new TodoList();
-        // SELECT THE LAST ITEM FROM THE DONE-LIST
-    const doneListLength = state.doneList.items.length;
-    const newItem = state.doneList.items[doneListLength - 1];
-    switchChecked(newItem);  // change CHECKED x UNCHECKED
-    state.todoList.items.push(newItem); // add to state.todoList
-    createTodoListMarkup();  // add the markup to the page
-} */
 
-// CREATE THE MARKUP ACCORDING TO STATE-TODOLIST-ITEMS[i] AND PUSH IT TO VIEW
-const createTodoListMarkup = () => {
-    const todoListLength = state.todoList.items.length;
-    const addedMarkup = todoView.renderTodoItem(state.todoList.items[todoListLength - 1]);
-    elements.tasksList.insertAdjacentHTML("beforeend", addedMarkup);
-}
-
-// CREATE THE MARKUP ACCORDING TO STATE-DONELIST-ITEMS[i] AND PUSH IT TO VIEW
-const createDoneListMarkup = () => {
-    const doneListLength = state.doneList.items.length;
-    const addedMarkup = todoView.renderTodoItem(state.doneList.items[doneListLength - 1]);
-    elements.doneList.insertAdjacentHTML("beforeend", addedMarkup);
+const createListMarkup = (listType) => {
+    let sList = undefined;  // ! ? Must be assigned???
+    let eList = undefined;  // ! ? Must be assigned???
+    if (listType === "todo") {
+        sList = state.todoList;
+        eList = elements.tasksList;
+    } else if (listType === "done") {
+        sList = state.doneList;
+        eList = elements.doneList;
+    }
+    const listLength = sList.items.length;
+    const addedMarkup = todoView.renderTodoItem(sList.items[listLength - 1]);
+    eList.insertAdjacentHTML("beforeend", addedMarkup);
 }
 
 // FUNCTION TRIGGERED AFTER PUSHING THE DELETE-ITEM-BUTTON:
-const removeFromTodoList = id => {
-    state.todoList.deleteTodoItem(id);
-    todoView.deleteItem(id);
-}
-
-const removeFromDoneList = id => {
-    state.doneList.deleteTodoItem(id);
+const removeFromList = (id, listType) => {
+    let list = undefined;  // ! ? Must be assigned???
+    if (listType === "todo") {
+        list = state.todoList;
+    } else if (listType === "done") {
+        list = state.doneList;
+    }
+    list.deleteTodoItem(id);
     todoView.deleteItem(id);
 }
 
@@ -169,6 +141,57 @@ const init = () => {
 window.addEventListener("load", () => {
     init();
 })
+
+
+/* const moveToDoneList = () => {
+    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
+    if (!state.doneList) state.doneList = new TodoList();
+    // SELECT THE LAST ITEM FROM THE TODO-LIST
+    state.todoList.getTodoItem(id)
+    switchChecked(newItem); // change CHECKED x UNCHECKED
+    state.doneList.items.push(newItem); // add to state.doneList
+    createDoneListMarkup(); // add the markup to the page
+} */
+
+/* 
+const moveToTodoList = () => {
+    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
+    if (!state.todoList) state.todoList = new TodoList();
+        // SELECT THE LAST ITEM FROM THE DONE-LIST
+    const doneListLength = state.doneList.items.length;
+    const newItem = state.doneList.items[doneListLength - 1];
+    switchChecked(newItem);  // change CHECKED x UNCHECKED
+    state.todoList.items.push(newItem); // add to state.todoList
+    createTodoListMarkup();  // add the markup to the page
+} */
+
+// CREATE THE MARKUP ACCORDING TO STATE-TODOLIST-ITEMS[i] AND PUSH IT TO VIEW
+/* 
+const createTodoListMarkup = () => {
+    const todoListLength = state.todoList.items.length;
+    const addedMarkup = todoView.renderTodoItem(state.todoList.items[todoListLength - 1]);
+    elements.tasksList.insertAdjacentHTML("beforeend", addedMarkup);
+}
+
+// CREATE THE MARKUP ACCORDING TO STATE-DONELIST-ITEMS[i] AND PUSH IT TO VIEW
+const createDoneListMarkup = () => {
+    const doneListLength = state.doneList.items.length;
+    const addedMarkup = todoView.renderTodoItem(state.doneList.items[doneListLength - 1]);
+    elements.doneList.insertAdjacentHTML("beforeend", addedMarkup);
+}
+ */
+
+ /* } else if (e.target.matches(".item__checkbox--btn")) {
+            if (e.target.checked) {
+                let tagId = e.target.parentElement.dataset.itemid;
+                moveToDoneList();
+                removeFromTodoList(tagId);
+            } else if (e.target.checked === false) {
+                let tagId = e.target.parentElement.dataset.itemid;
+                moveToTodoList();
+                removeFromDoneList(tagId);
+            }
+        } */
 
 
 /*  

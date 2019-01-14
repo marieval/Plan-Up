@@ -21,6 +21,12 @@ const setupEventListeners = () => {
         console.log(state);
     });
 
+    elements.deleteListsBtn.addEventListener("click", () => {
+        todoView.clearLists();
+        state.todoList.deleteList();
+        state.doneList.deleteList();
+    })
+
     // REACTION ON CLICKING BUTTONS / CHECKBOX
     elements.lists.addEventListener("click", e => {
         console.log("other-Btn state:");
@@ -45,10 +51,11 @@ const setupEventListeners = () => {
         } else if (e.target.matches(".item__edit--btn")) {
             const tagId = e.target.parentElement.dataset.itemid;
             console.log("edit-btn pressed")
+            todoView.clearLists();
 
             // MOVE TO DONE-LIST WHEN CHECKBOX IS CHECKED:
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked)) {
-            const tagId = e.target.parentNode.dataset.itemid;
+            const tagId = e.target.parentElement.dataset.itemid;
 
             // CREATE A NEW DONE-LIST IF THERE IS NONE YET  // ! can go together with below?
             if (!state.doneList) state.doneList = new TodoList();

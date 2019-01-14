@@ -37,6 +37,12 @@ export default class TodoList {
         return extractedItem;
     }
 
+    deleteList() {
+        this.items = [];
+    }
+
+
+
     /*     persistData() {
             localStorage.setItem("items", JSON.stringify(this.items));
         }

@@ -52,3 +52,16 @@ export const clearInput = () => {
         elements.taskUntil.value = "",
         elements.taskUrgency.value = ""
 }
+
+export const clearLists = () => {
+    const listsMarkup = `
+        <div class="lists">
+            <div class="tasks-list">
+                <h3>To-Do:</h3>
+            </div>
+            <div class="todo-list">
+                <h3>Done:</h3>
+            </div>
+        </div>`;
+    elements.lists.innerHTML = listsMarkup;
+}

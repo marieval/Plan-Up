@@ -8,7 +8,8 @@ export const elements = {
     lists: document.querySelector(".lists"),
     tasksList: document.querySelector(".tasks-list"),
     doneList: document.querySelector(".done-list"),
-    checkbox: document.querySelector("item__checkbox--btn")
+    checkbox: document.querySelector(".item__checkbox--btn"),
+    deleteListsBtn: document.querySelector("#delete-lists__btn")
 }
 
 

@@ -11,12 +11,12 @@
         padding: 0.25rem 0.5rem;
         display: flex;
         flex-direction: column;
-      
+
         flex: 1 1 auto;
 
         // border: rgb(0, 211, 0) dotted 1px;
     }
-  
+
     &__name {
         margin-left: 0;
         flex: 4 1 auto;
@@ -27,17 +27,16 @@
     }
 
     &__person {
-       //flex: 0 1 7rem;
+        //flex: 0 1 7rem;
+        display: none;
     }
 
     &__date--until {
         flex: 0 1 auto;
-        
     }
 
     &__urgency {
         flex: 0 0 auto;
-        
     }
 
     &__add-btn {
@@ -62,17 +61,13 @@
         font-size: 1.1rem;
 
         &--until {
-            width: 2.5rem;
+            width: 3rem;
         }
 
         &--urgency {
             width: 100%;
-            width: 7rem;
-           
+            width: 8rem;
         }
-
     }
-
-    
 }
 

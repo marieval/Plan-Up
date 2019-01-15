@@ -14,7 +14,7 @@
 
     <div class="heading">
         <h1 class="heading__top">Plan-Up</h1>
-        <h2 class="heading__sub">To-Do List</h2>
+        <!-- <h2 class="heading__sub">To-Do List</h2> -->
     </div>
 
     <div class="main-div">
@@ -25,7 +25,6 @@
                     <use xlink:href="img/sprite.svg#icon-news"></use>
                 </svg>
                 <input type="text" class="taskForm__input" id="taskName" placeholder="Task name" size="5">
-
             </div>
 
             <div class="taskForm__tag">
@@ -70,7 +69,66 @@
 
             <div class="wrapper__todo-list">
                 <h3 class="list-heading">To-Do:</h3>
+
+                <div class="lists-icons">
+                    <input class="lists-icons__checkbox--btn" type="checkbox" name="done"></input>
+                    <div class="lists-icons__urgency">
+                        <svg class="lists-icons__icon lists-icons__icon--urgency">
+                            <use xlink:href="img/sprite.svg#icon-new"></use>
+                        </svg>
+                        <!-- <input type="number" class="lists-icons__input lists-icons__input--urgency" id="listUrgency"
+                            placeholder="Urgency" min="0" max="9" size="2"> -->
+                    </div>
+
+                    <div class="lists-icons__name">
+                        <svg class="lists-icons__icon lists-icons__icon--name">
+                            <use xlink:href="img/sprite.svg#icon-news"></use>
+                        </svg>
+                        <!-- <input type="text" class="lists-icons__input" id="listName" placeholder="Task name" size="5"> -->
+                    </div>
+
+                    <div class="lists-icons__tag">
+                        <svg class="lists-icons__icon lists-icons__tag-icon">
+                            <use xlink:href="img/sprite.svg#icon-price-tag"></use>
+                        </svg>
+                        <!-- <input type="text" class="lists-icons__input" id="listTag" placeholder="Tags" size="2"> -->
+                    </div>
+
+                    <!-- <div class="lists-icons__person">
+                        <svg class="lists-icons__icon lists-icons__icon--person">
+                            <use xlink:href="img/sprite.svg#icon-users"></use>
+                        </svg>
+                        <input type="text" class="lists-icons__input" id="listPerson" placeholder="Person" size="2">
+                    </div>    -->
+
+                    <div class="lists-icons__dateFrom">
+                        <svg class="lists-icons__icon lists-icons__icon--from">
+                            <use xlink:href="img/sprite.svg#icon-aircraft-take-off"></use>
+                        </svg>
+                        <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->
+                    </div>
+
+                    <div class="lists-icons__dateUntil">
+                        <svg class="lists-icons__icon lists-icons__icon--until">
+                            <use xlink:href="img/sprite.svg#icon-aircraft-landing"></use>
+                        </svg>
+                        <!-- <input type="date" class="lists-icons__input lists-icons__input--until" id="listUntil" placeholder="Until"
+                            size="2"> -->
+                    </div>
+
+                    <div class="lists-icons__daysRemaining">
+                        <svg class="lists-icons__icon lists-icons__icon--remaining">
+                            <use xlink:href="img/sprite.svg#icon-hour-glass"></use>
+                        </svg>
+                        <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->
+                    </div>
+
+                    <button class="lists-icons__delete--btn lists-icons__delete--btn__icons">Delete</button>
+                    <button class="lists-icons__edit--btn lists-icons__edit--btn__icons">Edit</button>
+                </div>
+
                 <div class="tasks-list">
+
                     <div class="item">
                         <input class="item__checkbox--btn" type="checkbox" name="done"></input>
                         <div class="item__urgency">8</div>
@@ -82,7 +140,9 @@
                         <button class="item__delete--btn">Delete</button>
                         <button class="item__edit--btn">Edit</button>
                     </div>
+
                 </div>
+
                 <div class="delete-lists delete-lists__todo-list">
                     <button class="delete-lists__btn" id="delete-lists__btn--todo">Delete Todo-List</button>
                 </div>
@@ -91,6 +151,64 @@
 
             <div class="wrapper__done-list">
                 <h3 class="list-heading">Done:</h3>
+
+                <div class="lists-icons">
+                    <input class="lists-icons__checkbox--btn" type="checkbox" name="done"></input>
+                    <div class="lists-icons__urgency">
+                        <svg class="lists-icons__icon lists-icons__icon--urgency">
+                            <use xlink:href="img/sprite.svg#icon-new"></use>
+                        </svg>
+                        <!-- <input type="number" class="lists-icons__input lists-icons__input--urgency" id="listUrgency"
+                                                placeholder="Urgency" min="0" max="9" size="2"> -->
+                    </div>
+
+                    <div class="lists-icons__name">
+                        <svg class="lists-icons__icon lists-icons__icon--name">
+                            <use xlink:href="img/sprite.svg#icon-news"></use>
+                        </svg>
+                        <!-- <input type="text" class="lists-icons__input" id="listName" placeholder="Task name" size="5"> -->
+                    </div>
+
+                    <div class="lists-icons__tag">
+                        <svg class="lists-icons__icon lists-icons__tag-icon">
+                            <use xlink:href="img/sprite.svg#icon-price-tag"></use>
+                        </svg>
+                        <!-- <input type="text" class="lists-icons__input" id="listTag" placeholder="Tags" size="2"> -->
+                    </div>
+
+                    <!-- <div class="lists-icons__person">
+                                            <svg class="lists-icons__icon lists-icons__icon--person">
+                                                <use xlink:href="img/sprite.svg#icon-users"></use>
+                                            </svg>
+                                            <input type="text" class="lists-icons__input" id="listPerson" placeholder="Person" size="2">
+                                    </div>    -->
+
+                    <div class="lists-icons__dateFrom">
+                        <svg class="lists-icons__icon lists-icons__icon--from">
+                            <use xlink:href="img/sprite.svg#icon-aircraft-take-off"></use>
+                        </svg>
+                        <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->
+                    </div>
+
+                    <div class="lists-icons__dateUntil">
+                        <svg class="lists-icons__icon lists-icons__icon--until">
+                            <use xlink:href="img/sprite.svg#icon-aircraft-landing"></use>
+                        </svg>
+                        <!-- <input type="date" class="lists-icons__input lists-icons__input--until" id="listUntil" placeholder="Until"
+                                                size="2"> -->
+                    </div>
+
+                    <div class="lists-icons__daysRemaining">
+                        <svg class="lists-icons__icon lists-icons__icon--remaining">
+                            <use xlink:href="img/sprite.svg#icon-hour-glass"></use>
+                        </svg>
+                        <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->
+                    </div>
+
+                    <button class="lists-icons__delete--btn lists-icons__delete--btn__icons">Delete</button>
+                    <button class="lists-icons__edit--btn lists-icons__edit--btn__icons">Edit</button>
+                </div>
+
                 <div class="done-list">
                     <div class="item">
                         <input class="item__checkbox--btn" type="checkbox" name="done" checked></input>

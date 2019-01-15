@@ -4,6 +4,71 @@
     margin-top: 3rem;
 }
 
+
+.lists-icons {
+    /* width: 90%; */
+    display: flex;
+    align-items: flex-end;
+    //background-color: rgba($color-light, 0.2);
+    width: 100%;
+   //margin: 0.5rem 0;
+
+    & > * {
+        margin-left: 0.75rem;
+        /* border: 1px solid grey; */
+        // padding: 0.25rem 0.5rem;
+        // background-color: $color-light;
+        flex: 0 1 auto;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__checkbox--btn {
+        visibility: hidden;
+    }
+
+    &__urgency {
+        
+    }
+
+    &__name {
+        flex: 1 1 35%;
+    }
+
+    &__tag {
+        flex: 0 1 15%;
+    }
+
+    &__dateFrom,
+    &__dateUntil {
+        flex: 0 1 10%;
+    }
+
+    &__daysRemaining {
+        flex: 0 1 10%;
+    }
+
+    &__delete--btn,
+    &__edit--btn {
+        background-color: $color-tertiary;
+        padding: 0.25rem 0.5rem;
+        visibility: hidden;
+    }
+
+    &__icon {
+        height: 2rem;
+        width: 2rem;
+        fill: $color-primary-dark;
+        margin-left: 0.3rem;
+        // margin-bottom: 0.5rem;
+        cursor: pointer;
+
+        &--urgency {
+            margin-left: 0;
+        }
+    }
+}   
+
 .item {
     /* width: 90%; */
     display: flex;
@@ -49,8 +114,5 @@
     &__delete--btn,
     &__edit--btn {
         background-color: $color-tertiary;
-
     }
-    
-
 }

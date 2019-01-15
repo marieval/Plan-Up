@@ -8,7 +8,7 @@ export default class TodoList {
         this.items = [];
     }
 
-    addTodoItem(name, tag, person, from, until, urgency) {
+    addTodoItem(name, tag, person = "", from, until, urgency) {
         const randomNo = Math.random();
 
         const todoItem = {

@@ -21,8 +21,11 @@ const setupEventListeners = () => {
         console.log(state);
     });
 
-    elements.deleteListsBtn.addEventListener("click", () => {
-        todoView.clearLists();
+    // REACTION ON CLICKING DELETE-ALL-LISTS BUTTON
+    elements.deleteListsBtnAll.addEventListener("click", () => {
+        todoView.clearList("done");
+        todoView.clearList("todo");
+
         state.todoList.deleteList();
         state.doneList.deleteList();
     })

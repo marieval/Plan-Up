@@ -68,71 +68,56 @@
 
         <div class="lists">
 
-            <div class="tasks-list">
+            <div class="wrapper__todo-list">
                 <h3 class="list-heading">To-Do:</h3>
-                <div class="item">
-                    <input class="item__checkbox--btn" type="checkbox" name="done"></input>
-                    <div class="item__urgency">8</div>
-                    <div class="item__name">Do the shopping</div>
-                    <div class="item__tags">Out</div>
-                    <div class="item__dateFrom">1.1.1111</div>
-                    <div class="item__dateUntil">16.12.2222</div>
-                    <div class="item__daysRemaining">1000 days</div>
-                    <button class="item__delete--btn">Delete</button>
-                    <button class="item__edit--btn">Edit</button>
-
+                <div class="tasks-list">
+                    <div class="item">
+                        <input class="item__checkbox--btn" type="checkbox" name="done"></input>
+                        <div class="item__urgency">8</div>
+                        <div class="item__name">Do the shopping</div>
+                        <div class="item__tags">Out</div>
+                        <div class="item__dateFrom">1.1.1111</div>
+                        <div class="item__dateUntil">16.12.2222</div>
+                        <div class="item__daysRemaining">1000 days</div>
+                        <button class="item__delete--btn">Delete</button>
+                        <button class="item__edit--btn">Edit</button>
+                    </div>
                 </div>
-
-                <!--  <div class="item">                
-                            <input class="item__checkbox--btn" type="checkbox" name="done"></input>
-                            
-                            <div class="item__urgency">8</div>
-                            <div class="item__name">Do the shopping</div>
-                            <div class="item__tags">Out</div>
-                            <div class="item__dateFrom">Monday 1.1.2019</div>
-                            <div class="item__dateUntil">Friday 16.1.2019</div>
-                            <div class="item__daysRemaining">15 days</div>
-                            <button class="item__delete--btn">Delete</button>
-                            <button class="item__edit--btn">Edit</button>
-                        </div>
-            
-                        <div class="item">                
-                            <input class="item__checkbox--btn" type="checkbox" name="done"></input>
-                            <div class="item__urgency">8</div>
-                            <div class="item__name">Do the shopping</div>
-                            <div class="item__tags">Out</div>
-                            <div class="item__dateFrom">Monday 1.1.2019</div>
-                            <div class="item__dateUntil">Friday 16.1.2019</div>
-                            <div class="item__daysRemaining">15 days</div>
-                            <button class="item__delete--btn">Delete</button>
-                            <button class="item__edit--btn">Edit</button>
-                            
-                        </div> -->
+                <div class="delete-lists delete-lists__todo-list">
+                    <button class="delete-lists__btn" id="delete-lists__btn--todo">Delete Todo-List</button>
+                </div>
 
             </div>
 
-            <div class="done-list">
+            <div class="wrapper__done-list">
                 <h3 class="list-heading">Done:</h3>
-                <div class="item">
-                    <input class="item__checkbox--btn" type="checkbox" name="done" checked></input>
+                <div class="done-list">
+                    <div class="item">
+                        <input class="item__checkbox--btn" type="checkbox" name="done" checked></input>
 
-                    <div class="item__urgency">8</div>
-                    <div class="item__name">Do the shopping</div>
-                    <div class="item__tags">Out</div>
-                    <div class="item__dateFrom">1.1.1111</div>
-                    <div class="item__dateUntil">16.12.2222</div>
-                    <div class="item__daysRemaining">1000 days</div>
-                    <button class="item__delete--btn">Delete</button>
-                    <button class="item__edit--btn">Edit</button>
+                        <div class="item__urgency">8</div>
+                        <div class="item__name">Do the shopping</div>
+                        <div class="item__tags">Out</div>
+                        <div class="item__dateFrom">1.1.1111</div>
+                        <div class="item__dateUntil">16.12.2222</div>
+                        <div class="item__daysRemaining">1000 days</div>
+                        <button class="item__delete--btn">Delete</button>
+                        <button class="item__edit--btn">Edit</button>
 
+                    </div>
                 </div>
+                <div class="delete-lists delete-lists__done-list">
+                    <button class="delete-lists__btn" id="delete-lists__btn--done">Delete Done-List</button>
+                </div>
+
+
             </div>
 
 
         </div>
 
-        <div class="delete-lists">
-            <button class="delete-lists__btn" id="delete-lists__btn">Delete Lists</button>
+        <div class="delete-lists delete-lists__all">
+            <button class="delete-lists__btn" id="delete-lists__btn--all">Delete All Lists</button>
         </div>
     </div>
 

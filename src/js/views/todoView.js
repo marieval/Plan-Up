@@ -53,7 +53,15 @@ export const clearInput = () => {
         elements.taskUrgency.value = ""
 }
 
-export const clearLists = () => {
+export const clearList = (listType) => {
+    if (listType == "done") {
+        elements.doneList.innerHTML = "";
+    } else if (listType == "todo") {
+        elements.tasksList.innerHTML = "";
+    }
+}
+
+/* export const clearLists = () => {
     const listsMarkup = `
         <div class="lists">
             <div class="tasks-list">
@@ -64,4 +72,4 @@ export const clearLists = () => {
             </div>
         </div>`;
     elements.lists.innerHTML = listsMarkup;
-}
+} */

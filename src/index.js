@@ -46,13 +46,8 @@ const setupEventListeners = () => {
         console.log("other-Btn state:");
         console.log(state);
 
-        console.log("e.target-other-btn:");
-        console.log(e.target);
-
-        // REACTION ON CLICKING THE DEL-BTN 
+        // REACTION ON CLICKING THE DEL-BTN (item)
         if (e.target.matches(".item__delete--btn")) {
-            console.log("e.target-del-btn:");
-            console.log(e.target);
 
             const tagId = e.target.parentElement.dataset.itemid;
             if (!e.target.checked) {
@@ -61,7 +56,7 @@ const setupEventListeners = () => {
                 removeFromList(tagId, "done");
             }
 
-            // REACTION ON CLICKING THE EDIT-BTN 
+            // REACTION ON CLICKING THE EDIT-BTN (item) 
         } else if (e.target.matches(".item__edit--btn")) {
             const tagId = e.target.parentElement.dataset.itemid;
             console.log("edit-btn pressed")

@@ -11,7 +11,7 @@ export const elements = {
     checkbox: document.querySelector(".item__checkbox--btn"),
     deleteListsBtnAll: document.querySelector("#delete-lists__btn--all"),
     deleteListsBtnTodo: document.querySelector("#delete-lists__btn--todo"),
-    deleteListsAllBtnDone: document.querySelector("#delete-lists__btn--done")
+    deleteListsBtnDone: document.querySelector("#delete-lists__btn--done")
 }
 
 

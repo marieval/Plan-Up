@@ -23,22 +23,30 @@ const setupEventListeners = () => {
 
     // REACTION ON CLICKING DELETE-ALL-LISTS BUTTON
     elements.deleteListsBtnAll.addEventListener("click", () => {
-        todoView.clearList("done");
-        todoView.clearList("todo");
-        state.todoList.deleteList();
-        state.doneList.deleteList();
+        if (state.doneList) {
+            todoView.clearList("done");
+            state.doneList.deleteList();
+        }
+        if (state.todoList) {
+            todoView.clearList("todo");
+            state.todoList.deleteList();
+        }
     });
 
     // REACTION ON CLICKING DELETE-TODO-LIST BUTTON
     elements.deleteListsBtnTodo.addEventListener("click", () => {
-        todoView.clearList("todo");
-        state.todoList.deleteList();
+        if (state.todoList) {
+            todoView.clearList("todo");
+            state.todoList.deleteList();
+        }
     });
 
     // REACTION ON CLICKING DELETE-DONE-LIST BUTTON
     elements.deleteListsBtnDone.addEventListener("click", () => {
-        todoView.clearList("done");
-        state.doneList.deleteList();
+        if (state.doneList) {
+            todoView.clearList("done");
+            state.doneList.deleteList();
+        }
     });
 
     // REACTION ON CLICKING BUTTONS / CHECKBOX

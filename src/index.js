@@ -25,18 +25,18 @@ const setupEventListeners = () => {
 
     // REACTION ON CLICKING DELETE-ALL-LISTS BUTTON
     elements.deleteListsBtnAll.addEventListener("click", () => {
-        removeDoneList();
-        removeTodoList();
+        removeList("done");   // remove from state and DOM
+        removeList("todo");   // remove from state and DOM
     });
 
     // REACTION ON CLICKING DELETE-TODO-LIST BUTTON
     elements.deleteListsBtnTodo.addEventListener("click", () => {
-        removeTodoList();    // remove from state and DOM
+        removeList("todo");   // remove from state and DOM
     });
 
     // REACTION ON CLICKING DELETE-DONE-LIST BUTTON
     elements.deleteListsBtnDone.addEventListener("click", () => {
-        removeDoneList();    // remove from state and DOM
+        removeList("done");   // remove from state and DOM
     });
 
     // ! REACTION ON CLICKING THE ICON => SORTING ITEMS
@@ -76,16 +76,11 @@ const setupEventListeners = () => {
 
         // REACTION ON CLICKING THE DEL-BTN (item)
         if (e.target.matches(".item__delete--btn")) {
-            if (!e.target.checked) {
-                removeFromList(tagId, "todo");
-            } else {
-                removeFromList(tagId, "done");
-            }
+            (!e.target.checked) ? removeFromList(tagId, "todo") : removeFromList(tagId, "done");
 
             // REACTION ON CLICKING THE EDIT-BTN (item) 
         } else if (e.target.matches(".item__edit--btn")) {
             console.log("edit-btn pressed")
-            // / todoView.clearLists();
 
             // MOVE TO DONE-LIST WHEN CHECKBOX IS CHECKED:
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked)) {
@@ -112,18 +107,11 @@ const setupEventListeners = () => {
     })
 }
 
-const removeTodoList = () => {
-    if (state.todoList) {
-        state.todoList.deleteList();   // remove from state
-        todoView.clearList("todo");   // remove from DOM
-    }
-}
-
-const removeDoneList = () => {
-    if (state.doneList) {
-        state.doneList.deleteList();  // remove from state
-        todoView.clearList("done");   // remove from DOM
-    }
+const removeList = (listType) => {
+    const sList = findWhichList(listType, "state");
+    const eList = findWhichList(listType, "elem");
+    sList.deleteList();
+    eList.innerHTML = "";
 }
 
 const addToTodoList = () => {
@@ -132,8 +120,6 @@ const addToTodoList = () => {
     addFromFormToTodoState();       // add to state.todoList as a new item
     createListMarkup("todo");
 }
-
-
 
 const addFromFormToTodoState = () => {
     const dateFrom = new Date().getTime();
@@ -149,29 +135,50 @@ const addFromFormToTodoState = () => {
     );
 }
 
-const switchChecked = () => {
-    if (item.checked === "" || !item.checked) {
-        item.checked = "checked";
-    } else {
-        item.checked = "";
-    }
+const switchChecked = (item) => {
+    (item.checked === "" || !item.checked) ? item.checked = "checked" : item.checked = "";
 }
 
 const createListMarkup = (listType) => {
-    let sList = undefined;  // ! ? Must be assigned???
-    let eList = undefined;  // ! ? Must be assigned???
-    if (listType === "todo") {
-        sList = state.todoList;
-        eList = elements.tasksList;
-    } else if (listType === "done") {
-        sList = state.doneList;
-        eList = elements.doneList;
-    }
+    const sList = findWhichList(listType, "state");
+    const eList = findWhichList(listType, "elem");
     const listLength = sList.items.length;
     const addedMarkup = todoView.renderTodoItem(sList.items[listLength - 1]);
     eList.insertAdjacentHTML("beforeend", addedMarkup);
 }
 
+// FUNCTION TRIGGERED AFTER PUSHING THE DELETE-ITEM-BUTTON:
+const removeFromList = (id, listType) => {
+    const sList = findWhichList(listType, "state");
+    sList.deleteListItem(id);
+    todoView.deleteItem(id);
+}
+
+const findWhichList = (listType, elemOrState) => {
+    /*     let stateList = undefined;  // ! ? Must be assigned???
+        let elemList = undefined;  // ! ? Must be assigned??? */
+    if (elemOrState == "state") {
+        let stateList = undefined;  // ! ? Must be assigned???
+        if (listType === "todo") {
+            stateList = state.todoList;
+        } else if (listType === "done") {
+            stateList = state.doneList;
+        }
+        return stateList;
+
+    } else if (elemOrState == "elem") {
+        let elemList = undefined;  // ! ? Must be assigned???
+        if (listType === "todo") {
+            elemList = elements.tasksList;
+        } else if (listType === "done") {
+            elemList = elements.doneList;
+        }
+        return elemList;
+    }
+}
+
+
+// ! SORTING §§§§§§§§§§§§§§§
 const sortListUrgency = (items) => {
     const newStateTodoList = items.sort((a, b) => a.urgency - b.urgency);
 
@@ -193,20 +200,8 @@ const sortListTag = (items) => {
     //state.todoList.items = newStateTodoList;
     console.log(state.todoList.items);
     console.log(newStateTodoList);
-
 }
 
-// FUNCTION TRIGGERED AFTER PUSHING THE DELETE-ITEM-BUTTON:
-const removeFromList = (id, listType) => {
-    let list = undefined;  // ! ? Must be assigned???
-    if (listType === "todo") {
-        list = state.todoList;
-    } else if (listType === "done") {
-        list = state.doneList;
-    }
-    list.deleteTodoItem(id);
-    todoView.deleteItem(id);
-}
 
 // INITIALIZATION FUNCTION:
 const init = () => {
@@ -219,57 +214,6 @@ const init = () => {
 window.addEventListener("load", () => {
     init();
 })
-
-
-/* const moveToDoneList = () => {
-    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
-    if (!state.doneList) state.doneList = new TodoList();
-    // SELECT THE LAST ITEM FROM THE TODO-LIST
-    state.todoList.getTodoItem(id)
-    switchChecked(newItem); // change CHECKED x UNCHECKED
-    state.doneList.items.push(newItem); // add to state.doneList
-    createDoneListMarkup(); // add the markup to the page
-} */
-
-/* 
-const moveToTodoList = () => {
-    // CREATE A NEW DONE-LIST IF THERE IS NONE YET
-    if (!state.todoList) state.todoList = new TodoList();
-        // SELECT THE LAST ITEM FROM THE DONE-LIST
-    const doneListLength = state.doneList.items.length;
-    const newItem = state.doneList.items[doneListLength - 1];
-    switchChecked(newItem);  // change CHECKED x UNCHECKED
-    state.todoList.items.push(newItem); // add to state.todoList
-    createTodoListMarkup();  // add the markup to the page
-} */
-
-// CREATE THE MARKUP ACCORDING TO STATE-TODOLIST-ITEMS[i] AND PUSH IT TO VIEW
-/* 
-const createTodoListMarkup = () => {
-    const todoListLength = state.todoList.items.length;
-    const addedMarkup = todoView.renderTodoItem(state.todoList.items[todoListLength - 1]);
-    elements.tasksList.insertAdjacentHTML("beforeend", addedMarkup);
-}
-
-// CREATE THE MARKUP ACCORDING TO STATE-DONELIST-ITEMS[i] AND PUSH IT TO VIEW
-const createDoneListMarkup = () => {
-    const doneListLength = state.doneList.items.length;
-    const addedMarkup = todoView.renderTodoItem(state.doneList.items[doneListLength - 1]);
-    elements.doneList.insertAdjacentHTML("beforeend", addedMarkup);
-}
- */
-
- /* } else if (e.target.matches(".item__checkbox--btn")) {
-            if (e.target.checked) {
-                let tagId = e.target.parentElement.dataset.itemid;
-                moveToDoneList();
-                removeFromTodoList(tagId);
-            } else if (e.target.checked === false) {
-                let tagId = e.target.parentElement.dataset.itemid;
-                moveToTodoList();
-                removeFromDoneList(tagId);
-            }
-        } */
 
 
 /*  

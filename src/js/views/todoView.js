@@ -55,13 +55,13 @@ export const clearInput = () => {
         elements.taskUrgency.value = ""
 }
 
-export const clearList = (listType) => {
+/* export const clearList = (listType) => {
     if (listType == "done") {
         elements.doneList.innerHTML = "";
     } else if (listType == "todo") {
         elements.tasksList.innerHTML = "";
     }
-}
+} */
 
 /* export const clearLists = () => {
     const listsMarkup = `

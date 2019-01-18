@@ -29,7 +29,7 @@ export default class TodoList {
         return todoItem;
     }
 
-    deleteTodoItem(ID) {
+    deleteListItem(ID) {
         const index = this.items.findIndex(el => el.id == ID); // ! doesn´t work with "===". WHY???
         this.items.splice(index, 1);
     }

@@ -70,9 +70,10 @@
             <div class="wrapper__todo-list">
                 <h3 class="list-heading">To-Do:</h3>
 
-                <div class="lists-icons">
+                <div class="lists-icons lists-icons__todo">
                     <input class="lists-icons__checkbox--btn" type="checkbox" name="done"></input>
-                    <div class="lists-icons__item lists-icons__urgency" id="lists-icons__urgency">
+                    <!-- <div class="lists-icons__item lists-icons__urgency" id="lists-icons__urgency"> -->
+                    <div class="lists-icons__item lists-icons__urgency">
                         <svg class="lists-icons__icon lists-icons__icon--urgency">
                             <use xlink:href="img/sprite.svg#icon-new"></use>
                         </svg>
@@ -152,9 +153,9 @@
             <div class="wrapper__done-list">
                 <h3 class="list-heading">Done:</h3>
 
-                <div class="lists-icons">
+                <div class="lists-icons  lists-icons__done">
                     <input class="lists-icons__checkbox--btn" type="checkbox" name="done"></input>
-                    <div class="lists-icons__urgency">
+                    <div class="lists-icons__item lists-icons__urgency">
                         <svg class="lists-icons__icon lists-icons__icon--urgency">
                             <use xlink:href="img/sprite.svg#icon-new"></use>
                         </svg>
@@ -162,15 +163,15 @@
                                                 placeholder="Urgency" min="0" max="9" size="2"> -->
                     </div>
 
-                    <div class="lists-icons__name">
-                        <svg class="lists-icons__icon lists-icons__icon--name">
+                    <div class="lists-icons__item lists-icons__name">
+                        <svg class="lists-icons__icon lists-icons__icon lists-icons__icon--name">
                             <use xlink:href="img/sprite.svg#icon-news"></use>
                         </svg>
                         <!-- <input type="text" class="lists-icons__input" id="listName" placeholder="Task name" size="5"> -->
                     </div>
 
-                    <div class="lists-icons__tag">
-                        <svg class="lists-icons__icon lists-icons__tag-icon">
+                    <div class="lists-icons__item lists-icons__tag">
+                        <svg class="lists-icons__icon lists-icons__icon lists-icons__tag-icon">
                             <use xlink:href="img/sprite.svg#icon-price-tag"></use>
                         </svg>
                         <!-- <input type="text" class="lists-icons__input" id="listTag" placeholder="Tags" size="2"> -->
@@ -183,23 +184,23 @@
                                             <input type="text" class="lists-icons__input" id="listPerson" placeholder="Person" size="2">
                                     </div>    -->
 
-                    <div class="lists-icons__dateFrom">
-                        <svg class="lists-icons__icon lists-icons__icon--from">
+                    <div class="lists-icons__item lists-icons__dateFrom">
+                        <svg class="lists-icons__icon lists-icons__icon lists-icons__icon--from">
                             <use xlink:href="img/sprite.svg#icon-aircraft-take-off"></use>
                         </svg>
                         <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->
                     </div>
 
-                    <div class="lists-icons__dateUntil">
-                        <svg class="lists-icons__icon lists-icons__icon--until">
+                    <div class="lists-icons__item lists-icons__dateUntil">
+                        <svg class="lists-icons__icon lists-icons__icon lists-icons__icon--until">
                             <use xlink:href="img/sprite.svg#icon-aircraft-landing"></use>
                         </svg>
                         <!-- <input type="date" class="lists-icons__input lists-icons__input--until" id="listUntil" placeholder="Until"
                                                 size="2"> -->
                     </div>
 
-                    <div class="lists-icons__daysRemaining">
-                        <svg class="lists-icons__icon lists-icons__icon--remaining">
+                    <div class="lists-icons__item lists-icons__daysRemaining">
+                        <svg class="lists-icons__icon lists-icons__icon lists-icons__icon--remaining">
                             <use xlink:href="img/sprite.svg#icon-hour-glass"></use>
                         </svg>
                         <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->

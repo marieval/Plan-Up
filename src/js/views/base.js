@@ -14,7 +14,9 @@ export const elements = {
     deleteListsBtnAll: document.querySelector("#delete-lists__btn--all"),
     deleteListsBtnTodo: document.querySelector("#delete-lists__btn--todo"),
     deleteListsBtnDone: document.querySelector("#delete-lists__btn--done"),
-    listIcons: document.querySelector(".lists-icons")
+    listIcons: document.querySelector(".lists-icons"),
+    listIconsTodo: document.querySelector(".lists-icons__todo"),
+    listIconsDone: document.querySelector(".lists-icons__done")
 }
 
 

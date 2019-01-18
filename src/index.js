@@ -40,35 +40,44 @@ const setupEventListeners = () => {
     });
 
     // ! REACTION ON CLICKING THE ICON => SORTING ITEMS
-    elements.listIcons.addEventListener("click", e => {
+    elements.listIconsTodo.addEventListener("click", e => {
         const elem = e.target.closest(".lists-icons__item");
-
-        //console.log(elem);
-        //console.log(state);
-
-        if (elem.id == "lists-icons__urgency") {
-            console.log("**** urgency icon clicked");
-            sortListUrgency(state.todoList.items);
-
-        } else if (elem.id == "lists-icons__name") {
-            console.log("**** name icon clicked");
-            sortListName(state.todoList.items);
-
-        } else if (elem.id == "lists-icons__tag") {
-            console.log("**** tag icon clicked");
-            sortListTag(state.todoList.items);
-
-        } else if (elem.id == "lists-icons__dateFrom") {
+        console.log("eventListener started +++++++++++++++");
+        if (elem.classList.contains("lists-icons__urgency")) {
+            sortList(state.todoList, "urgency");
+            console.log("urgency triggered +++++++++++++++");
+        } else if (elem.classList.contains("lists-icons__name")) {
+            sortList(state.todoList, "name");
+            console.log("name triggered +++++++++++++++");
+        } else if (elem.classList.contains("lists-icons__tag")) {
+            sortList(state.todoList, "tag");
+        } else if (elem.classList.contains("lists-icons__dateFrom")) {
             console.log("**** dateFrom icon clicked");
-
-        } else if (elem.id == "lists-icons__dateUntil") {
+        } else if (elem.classList.contains("lists-icons__dateUntil")) {
             console.log("**** dateUntil icon clicked");
-
-        } else if (elem.id == "lists-icons__daysRemaining") {
+        } else if (elem.classList.contains("lists-icons__daysRemaining")) {
             console.log("**** daysRemaining icon clicked");
-
         }
+    })
 
+    elements.listIconsDone.addEventListener("click", e => {
+        const elem = e.target.closest(".lists-icons__item");
+        console.log("eventListener on DoneList started +++++++++++++++");
+        if (elem.classList.contains("lists-icons__urgency")) {
+            sortList(state.doneList, "urgency");
+            console.log("urgency triggered +++++++++++++++");
+        } else if (elem.classList.contains("lists-icons__name")) {
+            sortList(state.doneList, "name");
+            console.log("name triggered +++++++++++++++");
+        } else if (elem.classList.contains("lists-icons__tag")) {
+            sortList(state.doneList, "tag");
+        } else if (elem.classList.contains("lists-icons__dateFrom")) {
+            console.log("**** dateFrom icon clicked");
+        } else if (elem.classList.contains("lists-icons__dateUntil")) {
+            console.log("**** dateUntil icon clicked");
+        } else if (elem.classList.contains("lists-icons__daysRemaining")) {
+            console.log("**** daysRemaining icon clicked");
+        }
     })
 
     // REACTION ON CLICKING BUTTONS / CHECKBOX
@@ -153,23 +162,23 @@ const removeFromList = (id, listType) => {
     todoView.deleteItem(id);
 }
 
-const findWhichList = (listType, elemOrState) => {
+const findWhichList = (liType, elemOrState) => {
     /*     let stateList = undefined;  // ! ? Must be assigned???
         let elemList = undefined;  // ! ? Must be assigned??? */
     if (elemOrState == "state") {
         let stateList = undefined;  // ! ? Must be assigned???
-        if (listType === "todo") {
+        if (liType === "todo") {
             stateList = state.todoList;
-        } else if (listType === "done") {
+        } else if (liType === "done") {
             stateList = state.doneList;
         }
         return stateList;
 
     } else if (elemOrState == "elem") {
         let elemList = undefined;  // ! ? Must be assigned???
-        if (listType === "todo") {
+        if (liType === "todo") {
             elemList = elements.tasksList;
-        } else if (listType === "done") {
+        } else if (liType === "done") {
             elemList = elements.doneList;
         }
         return elemList;
@@ -178,29 +187,39 @@ const findWhichList = (listType, elemOrState) => {
 
 
 // ! SORTING §§§§§§§§§§§§§§§
-const sortListUrgency = (items) => {
-    const newStateTodoList = items.sort((a, b) => a.urgency - b.urgency);
 
-    //state.todoList.items = newStateTodoList;
-    console.log(state.todoList.items);
-    console.log(newStateTodoList);
+const sortList = (listType, column) => {
+    if (column == "urgency") {
+        listType.items.sort((a, b) => a.urgency - b.urgency);
+        console.log(state.todoList.items);
+    } else if (column == "name") {
+        listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        console.log(listType.items);
+    } else if (column == "tag") {
+        listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
+        console.log(listType.items);
+    }
+
 }
 
-const sortListName = (items) => {
-    const newStateTodoList = items.sort((a, b) => a.name.toLowerCase() - b.name.toLowerCase());
-
-    //state.todoList.items = newStateTodoList;
+/* const sortListUrgency = (listType) => {
+    listType.items.sort((a, b) => a.urgency - b.urgency);
+    console.log("sorted-urgency:++++++++++++++");
     console.log(state.todoList.items);
-    console.log(newStateTodoList);
 }
 
-const sortListTag = (items) => {
-    const newStateTodoList = items.sort((a, b) => a.tag - b.tag);
-    //state.todoList.items = newStateTodoList;
-    console.log(state.todoList.items);
-    console.log(newStateTodoList);
+const sortListName = (listType) => {
+    listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    console.log("sorted-name:++++++++++++++");
+    console.log(listType.items);
 }
 
+const sortListTag = (listType) => {
+    listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
+    console.log("sorted-tag:++++++++++++++");
+    console.log(listType.items);
+}
+ */
 
 // INITIALIZATION FUNCTION:
 const init = () => {

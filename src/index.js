@@ -40,7 +40,10 @@ const setupEventListeners = () => {
     });
 
     // ! REACTION ON CLICKING THE ICON => SORTING ITEMS
+
     elements.listIconsTodo.addEventListener("click", e => {
+        console.log("e.target");
+        console.log(e.target);
         const elem = e.target.closest(".lists-icons__item");
         console.log("eventListener started +++++++++++++++");
         if (elem.classList.contains("lists-icons__urgency")) {
@@ -53,14 +56,19 @@ const setupEventListeners = () => {
             sortList(state.todoList, "tag");
         } else if (elem.classList.contains("lists-icons__dateFrom")) {
             console.log("**** dateFrom icon clicked");
+            sortList(state.todoList, "dateFrom");
         } else if (elem.classList.contains("lists-icons__dateUntil")) {
             console.log("**** dateUntil icon clicked");
+            sortList(state.todoList, "dateUntil");
         } else if (elem.classList.contains("lists-icons__daysRemaining")) {
+            sortList(state.todoList, "daysRemaining");
             console.log("**** daysRemaining icon clicked");
         }
     })
 
     elements.listIconsDone.addEventListener("click", e => {
+        console.log("e.target");
+        console.log(e.target);
         const elem = e.target.closest(".lists-icons__item");
         console.log("eventListener on DoneList started +++++++++++++++");
         if (elem.classList.contains("lists-icons__urgency")) {
@@ -73,9 +81,12 @@ const setupEventListeners = () => {
             sortList(state.doneList, "tag");
         } else if (elem.classList.contains("lists-icons__dateFrom")) {
             console.log("**** dateFrom icon clicked");
+            sortList(state.doneList, "dateFrom");
         } else if (elem.classList.contains("lists-icons__dateUntil")) {
             console.log("**** dateUntil icon clicked");
+            sortList(state.doneList, "dateUntil");
         } else if (elem.classList.contains("lists-icons__daysRemaining")) {
+            sortList(state.doneList, "daysRemaining");
             console.log("**** daysRemaining icon clicked");
         }
     })
@@ -197,6 +208,18 @@ const sortList = (listType, column) => {
         console.log(listType.items);
     } else if (column == "tag") {
         listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
+        console.log(listType.items);
+    } else if (column == "dateFrom") {
+        console.log("listtype-from:");
+        console.log(listType.items[0].from);
+        console.log(listType.items[1].from);
+        console.log(listType.items[2].from);
+        console.log(listType.items[3].from);
+
+        listType.items.sort((a, b) => (b.from - a.from) ? 1 : -1);
+        console.log(listType.items);
+    } else if (column == "daysRemaining" || column == "dateUntil") {
+        listType.items.sort((a, b) => (b.until - a.until) ? 1 : -1);
         console.log(listType.items);
     }
 

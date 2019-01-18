@@ -1,3 +1,5 @@
+// ***** js/models/TodoList.js ********
+
 /* import uniqid from "uniqid"; */
 
 /* List with todo-items: constructor for todo-item, 

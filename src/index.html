@@ -31,7 +31,7 @@
                 <svg class="taskForm__icon taskForm__tag-icon">
                     <use xlink:href="img/sprite.svg#icon-price-tag"></use>
                 </svg>
-                <input type="text" class="taskForm__input" id="taskTag" placeholder="Tags" size="2">
+                <input type="text" class="taskForm__input" id="taskTag" placeholder="Tag" size="2">
             </div>
 
             <div class="taskForm__person">
@@ -72,7 +72,7 @@
 
                 <div class="lists-icons">
                     <input class="lists-icons__checkbox--btn" type="checkbox" name="done"></input>
-                    <div class="lists-icons__urgency">
+                    <div class="lists-icons__item lists-icons__urgency" id="lists-icons__urgency">
                         <svg class="lists-icons__icon lists-icons__icon--urgency">
                             <use xlink:href="img/sprite.svg#icon-new"></use>
                         </svg>
@@ -80,35 +80,35 @@
                             placeholder="Urgency" min="0" max="9" size="2"> -->
                     </div>
 
-                    <div class="lists-icons__name">
+                    <div class="lists-icons__item lists-icons__name" id="lists-icons__name">
                         <svg class="lists-icons__icon lists-icons__icon--name">
                             <use xlink:href="img/sprite.svg#icon-news"></use>
                         </svg>
                         <!-- <input type="text" class="lists-icons__input" id="listName" placeholder="Task name" size="5"> -->
                     </div>
 
-                    <div class="lists-icons__tag">
+                    <div class="lists-icons__item lists-icons__tag" id="lists-icons__tag">
                         <svg class="lists-icons__icon lists-icons__tag-icon">
                             <use xlink:href="img/sprite.svg#icon-price-tag"></use>
                         </svg>
                         <!-- <input type="text" class="lists-icons__input" id="listTag" placeholder="Tags" size="2"> -->
                     </div>
 
-                    <!-- <div class="lists-icons__person">
+                    <!-- <div class="lists-icons__item lists-icons__person" id="lists-icons__person">
                         <svg class="lists-icons__icon lists-icons__icon--person">
                             <use xlink:href="img/sprite.svg#icon-users"></use>
                         </svg>
                         <input type="text" class="lists-icons__input" id="listPerson" placeholder="Person" size="2">
                     </div>    -->
 
-                    <div class="lists-icons__dateFrom">
+                    <div class="lists-icons__item lists-icons__dateFrom" id="lists-icons__dateFrom">
                         <svg class="lists-icons__icon lists-icons__icon--from">
                             <use xlink:href="img/sprite.svg#icon-aircraft-take-off"></use>
                         </svg>
                         <!-- <input type="date" class="lists-icons__input lists-icons__input--from" id="listFrom" placeholder="From" size="2"> -->
                     </div>
 
-                    <div class="lists-icons__dateUntil">
+                    <div class="lists-icons__item lists-icons__dateUntil" id="lists-icons__dateUntil">
                         <svg class="lists-icons__icon lists-icons__icon--until">
                             <use xlink:href="img/sprite.svg#icon-aircraft-landing"></use>
                         </svg>
@@ -116,7 +116,7 @@
                             size="2"> -->
                     </div>
 
-                    <div class="lists-icons__daysRemaining">
+                    <div class="lists-icons__item lists-icons__daysRemaining" id="lists-icons__daysRemaining">
                         <svg class="lists-icons__icon lists-icons__icon--remaining">
                             <use xlink:href="img/sprite.svg#icon-hour-glass"></use>
                         </svg>
@@ -129,7 +129,7 @@
 
                 <div class="tasks-list">
 
-                    <div class="item">
+                    <!-- <div class="item">
                         <input class="item__checkbox--btn" type="checkbox" name="done"></input>
                         <div class="item__urgency">8</div>
                         <div class="item__name">Do the shopping</div>
@@ -139,7 +139,7 @@
                         <div class="item__daysRemaining">1000 days</div>
                         <button class="item__delete--btn">Delete</button>
                         <button class="item__edit--btn">Edit</button>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -210,9 +210,8 @@
                 </div>
 
                 <div class="done-list">
-                    <div class="item">
+                    <!-- <div class="item">
                         <input class="item__checkbox--btn" type="checkbox" name="done" checked></input>
-
                         <div class="item__urgency">8</div>
                         <div class="item__name">Do the shopping</div>
                         <div class="item__tags">Out</div>
@@ -221,8 +220,7 @@
                         <div class="item__daysRemaining">1000 days</div>
                         <button class="item__delete--btn">Delete</button>
                         <button class="item__edit--btn">Edit</button>
-
-                    </div>
+                    </div> -->
                 </div>
                 <div class="delete-lists delete-lists__done-list">
                     <button class="delete-lists__btn" id="delete-lists__btn--done">Delete Done-List</button>

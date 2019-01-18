@@ -1,3 +1,5 @@
+// ***** js/views/base.js ********
+
 export const elements = {
     addBtn: document.querySelector("#addBtn"),
     taskName: document.querySelector("#taskName"),
@@ -11,7 +13,8 @@ export const elements = {
     checkbox: document.querySelector(".item__checkbox--btn"),
     deleteListsBtnAll: document.querySelector("#delete-lists__btn--all"),
     deleteListsBtnTodo: document.querySelector("#delete-lists__btn--todo"),
-    deleteListsBtnDone: document.querySelector("#delete-lists__btn--done")
+    deleteListsBtnDone: document.querySelector("#delete-lists__btn--done"),
+    listIcons: document.querySelector(".lists-icons")
 }
 
 

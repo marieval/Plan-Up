@@ -16,7 +16,7 @@ export const getDate = (timestamp) => {
     return dayDate;
 }
 
-export const renderTodoItem = (todoItem) => {
+export const renderItem = (todoItem) => {
     const dayFrom = getDate(todoItem.from);
     const dayUntil = getDate(todoItem.until);
     const daysBetween = getDaysDifference((new Date().getTime()), todoItem.until);
@@ -42,9 +42,9 @@ export const deleteItem = id => {
     if (todoItem) todoItem.parentElement.removeChild(todoItem);
 }
 
-export const getMarkup = id => {
-    const movedMarkup = document.querySelector(`[data-itemid="${id}"]`);
-    return movedMarkup;
+export const getItemMarkup = id => {
+    const movedItemMarkup = document.querySelector(`[data-itemid="${id}"]`);
+    return movedItemMarkup;
 }
 
 export const clearInput = () => {

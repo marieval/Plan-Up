@@ -49,22 +49,25 @@ const setupEventListeners = () => {
         if (elem.id == "lists-icons__urgency") {
             console.log("**** urgency icon clicked");
             sortListUrgency(state.todoList.items);
+
         } else if (elem.id == "lists-icons__name") {
             console.log("**** name icon clicked");
             sortListName(state.todoList.items);
+
         } else if (elem.id == "lists-icons__tag") {
             console.log("**** tag icon clicked");
             sortListTag(state.todoList.items);
+
         } else if (elem.id == "lists-icons__dateFrom") {
             console.log("**** dateFrom icon clicked");
+
         } else if (elem.id == "lists-icons__dateUntil") {
             console.log("**** dateUntil icon clicked");
+
         } else if (elem.id == "lists-icons__daysRemaining") {
             console.log("**** daysRemaining icon clicked");
+
         }
-
-
-        // const iconType = ;
 
     })
 
@@ -82,29 +85,26 @@ const setupEventListeners = () => {
         } else if (e.target.matches(".item__edit--btn")) {
             console.log("edit-btn pressed")
 
-            // MOVE TO DONE-LIST WHEN CHECKBOX IS CHECKED:
+            // REACTION TO CHECKING / UCHECKING THE CHECKBOX
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked)) {
-
-            // CREATE A NEW DONE-LIST IF THERE IS NONE YET  // ! can go together with below?
             if (!state.doneList) state.doneList = new TodoList();
-
-            const newItem = state.todoList.getTodoItem(tagId);      // get copy of the item         
-            switchChecked(newItem);     // change CHECKED x UNCHECKED            
-            state.doneList.items.push(newItem);     // add to state.doneList           
-            removeFromList(tagId, "todo");      // remove from the first list
-            createListMarkup("done");       // add the markup and put it to the correct list
+            moveItem(tagId, "todo", "done");
 
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked === false)) {
-            // CREATE A NEW TODO-LIST IF THERE IS NONE YET // ! can go together with above?
             if (!state.todoList) state.todoList = new TodoList();
-
-            const newItem = state.doneList.getTodoItem(tagId);      // get copy of the item         
-            switchChecked(newItem);     // change CHECKED x UNCHECKED            
-            state.todoList.items.push(newItem); // add to state.todoList
-            removeFromList(tagId, "done");
-            createListMarkup("todo");
+            moveItem(tagId, "done", "todo");
         }
     })
+}
+
+const moveItem = (tagId, listTypeFrom, listTypeTo) => {
+    const sListFrom = findWhichList(listTypeFrom, "state");
+    const sListTo = findWhichList(listTypeTo, "state");
+    const newItem = sListFrom.getTodoItem(tagId);   // get copy of the item  
+    switchChecked(newItem);     // change CHECKED x UNCHECKED 
+    sListTo.items.push(newItem);     // add to state.doneList  
+    removeFromList(tagId, listTypeFrom);      // remove from the first list
+    createListMarkup(listTypeTo);       // add the markup and put it to the correct list
 }
 
 const removeList = (listType) => {
@@ -115,7 +115,6 @@ const removeList = (listType) => {
 }
 
 const addToTodoList = () => {
-    // CREATE A NEW TODO-LIST IF THERE IS NONE YET
     if (!state.todoList) state.todoList = new TodoList();
     addFromFormToTodoState();       // add to state.todoList as a new item
     createListMarkup("todo");
@@ -143,7 +142,7 @@ const createListMarkup = (listType) => {
     const sList = findWhichList(listType, "state");
     const eList = findWhichList(listType, "elem");
     const listLength = sList.items.length;
-    const addedMarkup = todoView.renderTodoItem(sList.items[listLength - 1]);
+    const addedMarkup = todoView.renderItem(sList.items[listLength - 1]);
     eList.insertAdjacentHTML("beforeend", addedMarkup);
 }
 

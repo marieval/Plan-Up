@@ -73,6 +73,10 @@
     }
 }   
 
+.lists-icons__icon active {
+    fill: $color-primary-light;
+}
+
 .tasks-list, 
 .done-list {
     padding-top: 0.3rem;

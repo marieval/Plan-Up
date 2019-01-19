@@ -44,6 +44,7 @@ const setupEventListeners = () => {
     elements.listIconsTodo.addEventListener("click", e => {
         console.log("e.target");
         console.log(e.target);
+
         const elem = e.target.closest(".lists-icons__item");
         console.log("eventListener started +++++++++++++++");
         if (elem.classList.contains("lists-icons__urgency")) {
@@ -209,20 +210,38 @@ const sortList = (listType, column) => {
     } else if (column == "tag") {
         listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
         console.log(listType.items);
-    } else if (column == "dateFrom") {
+
+    } else if (column == "dateFrom") { // ! TODO !!!! From - not working!!!!
+        listType.items.sort((a, b) => (b.from - a.from) ? 1 : -1);
         console.log("listtype-from:");
         console.log(listType.items[0].from);
         console.log(listType.items[1].from);
         console.log(listType.items[2].from);
         console.log(listType.items[3].from);
-
-        listType.items.sort((a, b) => (b.from - a.from) ? 1 : -1);
         console.log(listType.items);
     } else if (column == "daysRemaining" || column == "dateUntil") {
         listType.items.sort((a, b) => (b.until - a.until) ? 1 : -1);
         console.log(listType.items);
     }
 
+}
+
+const setUntilDate = () => {
+    //setTodayDate();
+    restrictPastDates();
+}
+
+const setTodayDate = () => {
+    // elements.taskUntil.value = new Date().toDateInputValue();
+    elements.taskUntil.valueAsDate = new Date();
+    //let today = new Date().toISOString().substr(0, 10);
+    //elements.taskUntil.setAttribute('value', today);
+    //elements.taskUntil.value = today;
+}
+
+const restrictPastDates = () => {
+    let today = new Date().toISOString().substr(0, 10);  // ! same as: new Date().toISOString().split('T')[0];
+    elements.taskUntil.setAttribute('min', today);
 }
 
 /* const sortListUrgency = (listType) => {
@@ -249,6 +268,7 @@ const init = () => {
     console.log("App has started");
     setupEventListeners();
     todoView.clearInput();
+    setUntilDate();
 }
 
 // CONTROLLING STARTING SETTING (AFTER LOADING):

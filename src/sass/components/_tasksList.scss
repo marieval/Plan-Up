@@ -66,6 +66,13 @@
         margin-left: 0.3rem;
         // margin-bottom: 0.5rem;
         cursor: pointer;
+        animation: 0.2s all;
+
+        &:hover,
+        &:active {
+            transform: scale(1.2);
+            fill: $color-primary;
+        }
 
         &--urgency {
             margin-left: 0;
@@ -73,9 +80,9 @@
     }
 }   
 
-.lists-icons__icon active {
+/* .lists-icons__icon active {
     fill: $color-primary-light;
-}
+} */
 
 .tasks-list, 
 .done-list {

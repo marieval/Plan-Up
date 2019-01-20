@@ -1,6 +1,7 @@
 // ***** js/views/base.js ********
 
 export const elements = {
+    inputs: document.querySelector(".taskForm__input"),
     addBtn: document.querySelector("#addBtn"),
     taskName: document.querySelector("#taskName"),
     taskTag: document.querySelector("#taskTag"),

@@ -15,6 +15,18 @@ const state = {
 // SETUP EVENT LISTENERS:
 const setupEventListeners = () => {
 
+    /* elements.inputs.addEventlistener("invalid", () => {
+        const invalidClassName = "invalid";
+        input.classList.add(invalidClassName);
+    })
+
+    elements.inputs.addEventListener("input", () => {
+        if (input.validity.valid) {
+            const invalidClassName = "invalid";
+            input.classList.remove(invalidClassName);
+        }
+    })
+ */
     // REACTION ON CLICKING THE ADD-BTN:
     elements.addBtn.addEventListener("click", () => {
         addToTodoList();
@@ -42,53 +54,57 @@ const setupEventListeners = () => {
     // ! REACTION ON CLICKING THE ICON => SORTING ITEMS
 
     elements.listIconsTodo.addEventListener("click", e => {
-        console.log("e.target");
-        console.log(e.target);
+        if (state.todoList) {
+            console.log("e.target");
+            console.log(e.target);
 
-        const elem = e.target.closest(".lists-icons__item");
-        console.log("eventListener started +++++++++++++++");
-        if (elem.classList.contains("lists-icons__urgency")) {
-            sortList(state.todoList, "urgency");
-            console.log("urgency triggered +++++++++++++++");
-        } else if (elem.classList.contains("lists-icons__name")) {
-            sortList(state.todoList, "name");
-            console.log("name triggered +++++++++++++++");
-        } else if (elem.classList.contains("lists-icons__tag")) {
-            sortList(state.todoList, "tag");
-        } else if (elem.classList.contains("lists-icons__dateFrom")) {
-            console.log("**** dateFrom icon clicked");
-            sortList(state.todoList, "dateFrom");
-        } else if (elem.classList.contains("lists-icons__dateUntil")) {
-            console.log("**** dateUntil icon clicked");
-            sortList(state.todoList, "dateUntil");
-        } else if (elem.classList.contains("lists-icons__daysRemaining")) {
-            sortList(state.todoList, "daysRemaining");
-            console.log("**** daysRemaining icon clicked");
+            const elem = e.target.closest(".lists-icons__item");
+            console.log("eventListener started +++++++++++++++");
+            if (elem.classList.contains("lists-icons__urgency")) {
+                sortList(state.todoList, "urgency");
+                console.log("urgency triggered +++++++++++++++");
+            } else if (elem.classList.contains("lists-icons__name")) {
+                sortList(state.todoList, "name");
+                console.log("name triggered +++++++++++++++");
+            } else if (elem.classList.contains("lists-icons__tag")) {
+                sortList(state.todoList, "tag");
+            } else if (elem.classList.contains("lists-icons__dateFrom")) {
+                console.log("**** dateFrom icon clicked");
+                sortList(state.todoList, "dateFrom");
+            } else if (elem.classList.contains("lists-icons__dateUntil")) {
+                console.log("**** dateUntil icon clicked");
+                sortList(state.todoList, "dateUntil");
+            } else if (elem.classList.contains("lists-icons__daysRemaining")) {
+                sortList(state.todoList, "daysRemaining");
+                console.log("**** daysRemaining icon clicked");
+            }
         }
     })
 
     elements.listIconsDone.addEventListener("click", e => {
-        console.log("e.target");
-        console.log(e.target);
-        const elem = e.target.closest(".lists-icons__item");
-        console.log("eventListener on DoneList started +++++++++++++++");
-        if (elem.classList.contains("lists-icons__urgency")) {
-            sortList(state.doneList, "urgency");
-            console.log("urgency triggered +++++++++++++++");
-        } else if (elem.classList.contains("lists-icons__name")) {
-            sortList(state.doneList, "name");
-            console.log("name triggered +++++++++++++++");
-        } else if (elem.classList.contains("lists-icons__tag")) {
-            sortList(state.doneList, "tag");
-        } else if (elem.classList.contains("lists-icons__dateFrom")) {
-            console.log("**** dateFrom icon clicked");
-            sortList(state.doneList, "dateFrom");
-        } else if (elem.classList.contains("lists-icons__dateUntil")) {
-            console.log("**** dateUntil icon clicked");
-            sortList(state.doneList, "dateUntil");
-        } else if (elem.classList.contains("lists-icons__daysRemaining")) {
-            sortList(state.doneList, "daysRemaining");
-            console.log("**** daysRemaining icon clicked");
+        if (state.doneList) {
+            console.log("e.target");
+            console.log(e.target);
+            const elem = e.target.closest(".lists-icons__item");
+            console.log("eventListener on DoneList started +++++++++++++++");
+            if (elem.classList.contains("lists-icons__urgency")) {
+                sortList(state.doneList, "urgency");
+                console.log("urgency triggered +++++++++++++++");
+            } else if (elem.classList.contains("lists-icons__name")) {
+                sortList(state.doneList, "name");
+                console.log("name triggered +++++++++++++++");
+            } else if (elem.classList.contains("lists-icons__tag")) {
+                sortList(state.doneList, "tag");
+            } else if (elem.classList.contains("lists-icons__dateFrom")) {
+                console.log("**** dateFrom icon clicked");
+                sortList(state.doneList, "dateFrom");
+            } else if (elem.classList.contains("lists-icons__dateUntil")) {
+                console.log("**** dateUntil icon clicked");
+                sortList(state.doneList, "dateUntil");
+            } else if (elem.classList.contains("lists-icons__daysRemaining")) {
+                sortList(state.doneList, "daysRemaining");
+                console.log("**** daysRemaining icon clicked");
+            }
         }
     })
 
@@ -244,18 +260,22 @@ const restrictPastDates = () => {
     elements.taskUntil.setAttribute('min', today);
 }
 
+
+
+
+
 /* const sortListUrgency = (listType) => {
     listType.items.sort((a, b) => a.urgency - b.urgency);
     console.log("sorted-urgency:++++++++++++++");
     console.log(state.todoList.items);
 }
-
+ 
 const sortListName = (listType) => {
     listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
     console.log("sorted-name:++++++++++++++");
     console.log(listType.items);
 }
-
+ 
 const sortListTag = (listType) => {
     listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
     console.log("sorted-tag:++++++++++++++");

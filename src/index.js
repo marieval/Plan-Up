@@ -61,27 +61,36 @@ const setupEventListeners = () => {
 
     elements.listIconsTodo.addEventListener("click", e => {
         if (state.todoList) {
-            console.log("e.target");
+            console.log("****** e.target in TODO-LIST");
             console.log(e.target);
 
+            const closestParentList = e.target.closest(".wrapper"); // find if it´s TODO or DONE
+            let sList = undefined;
+            if (closestParentList.id == "wrapper__todo-list") {
+                listType = "todo";
+                console.log("***** it´s todoList!!!!!!!!!!");
+            } else if (closestParentList.id == "wrapper__done-list") {
+                listType = "done";
+                console.log("***** it´s doneList!!!!!!!!!!");
+            }
+
+
             const elem = e.target.closest(".lists-icons__item");
-            console.log("eventListener started +++++++++++++++");
             if (elem.classList.contains("lists-icons__urgency")) {
-                sortList(state.todoList, "urgency");
-                console.log("urgency triggered +++++++++++++++");
+                sortList(listType, "urgency");
+                console.log("sortList todo called");
             } else if (elem.classList.contains("lists-icons__name")) {
-                sortList(state.todoList, "name");
-                console.log("name triggered +++++++++++++++");
+                sortList(sLlistTypeist, "name");
             } else if (elem.classList.contains("lists-icons__tag")) {
-                sortList(state.todoList, "tag");
+                sortList(listType, "tag");
             } else if (elem.classList.contains("lists-icons__dateFrom")) {
                 console.log("**** dateFrom icon clicked");
-                sortList(state.todoList, "dateFrom");
+                sortList(listType, "dateFrom");
             } else if (elem.classList.contains("lists-icons__dateUntil")) {
                 console.log("**** dateUntil icon clicked");
-                sortList(state.todoList, "dateUntil");
+                sortList(listType, "dateUntil");
             } else if (elem.classList.contains("lists-icons__daysRemaining")) {
-                sortList(state.todoList, "daysRemaining");
+                sortList(listType, "daysRemaining");
                 console.log("**** daysRemaining icon clicked");
             }
             // ! createNewListView();
@@ -90,26 +99,39 @@ const setupEventListeners = () => {
 
     elements.listIconsDone.addEventListener("click", e => {
         if (state.doneList) {
-            console.log("e.target");
+            console.log("e.target in DONE-LIST");
             console.log(e.target);
+
+            const closestParentList = e.target.closest(".wrapper"); // find if it´s TODO or DONE
+            let sList = undefined;
+            console.log("closestParentList.id")
+            console.log(closestParentList.id)
+            if (closestParentList.id == "wrapper__todo-list") {
+                listType = "todo";
+                console.log("***** it´s todoList!!!!!!!!!!");
+            } else if (closestParentList.id == "wrapper__done-list") {
+                listType = "todo";
+                console.log("***** it´s doneList!!!!!!!!!!");
+            }
+
             const elem = e.target.closest(".lists-icons__item");
             console.log("eventListener on DoneList started +++++++++++++++");
             if (elem.classList.contains("lists-icons__urgency")) {
-                sortList(state.doneList, "urgency");
+                sortList("done", "urgency");
                 console.log("urgency triggered +++++++++++++++");
             } else if (elem.classList.contains("lists-icons__name")) {
-                sortList(state.doneList, "name");
+                sortList("done", "name");
                 console.log("name triggered +++++++++++++++");
             } else if (elem.classList.contains("lists-icons__tag")) {
-                sortList(state.doneList, "tag");
+                sortList("done", "tag");
             } else if (elem.classList.contains("lists-icons__dateFrom")) {
                 console.log("**** dateFrom icon clicked");
-                sortList(state.doneList, "dateFrom");
+                sortList("done", "dateFrom");
             } else if (elem.classList.contains("lists-icons__dateUntil")) {
                 console.log("**** dateUntil icon clicked");
-                sortList(state.doneList, "dateUntil");
+                sortList("done", "dateUntil");
             } else if (elem.classList.contains("lists-icons__daysRemaining")) {
-                sortList(state.doneList, "daysRemaining");
+                sortList("done", "daysRemaining");
                 console.log("**** daysRemaining icon clicked");
             }
             // ! createNewListView();
@@ -144,8 +166,8 @@ const setupEventListeners = () => {
 }
 
 const moveItem = (tagId, listTypeFrom, listTypeTo) => {
-    const sListFrom = findWhichList(listTypeFrom, "state");
-    const sListTo = findWhichList(listTypeTo, "state");
+    const sListFrom = whichStateList(listTypeFrom);
+    const sListTo = whichStateList(listTypeTo);
     const newItem = sListFrom.getTodoItem(tagId);   // get copy of the item  
     switchChecked(newItem);     // change CHECKED x UNCHECKED 
     sListTo.items.push(newItem);     // add to state.doneList  
@@ -154,11 +176,20 @@ const moveItem = (tagId, listTypeFrom, listTypeTo) => {
 }
 
 const removeList = (listType) => {
-    const sList = findWhichList(listType, "state");
-    const eList = findWhichList(listType, "elem");
+    clearViewList(listType);
+    clearStateList(listType);
+}
+
+const clearStateList = (listType) => {
+    const sList = whichStateList(listType);
     sList.deleteList();
+}
+
+const clearViewList = (listType) => {
+    const eList = whichElemList(listType);
     eList.innerHTML = "";
 }
+
 
 const addToTodoList = () => {
     if (!state.todoList) state.todoList = new TodoList(); // ! 
@@ -199,7 +230,6 @@ const addFromFormToTodoState = () => {
         timestampUntil,
         elements.taskUrgency.value
     );
-
 }
 
 const switchChecked = (item) => {
@@ -207,8 +237,8 @@ const switchChecked = (item) => {
 }
 
 const createListMarkup = (listType) => {
-    const sList = findWhichList(listType, "state");
-    const eList = findWhichList(listType, "elem");
+    const sList = whichStateList(listType);
+    const eList = whichElemList(listType);
     const listLength = sList.items.length;
     const addedMarkup = todoView.renderItem(sList.items[listLength - 1]);
     eList.insertAdjacentHTML("beforeend", addedMarkup);
@@ -216,75 +246,64 @@ const createListMarkup = (listType) => {
 
 // FUNCTION TRIGGERED AFTER PUSHING THE DELETE-ITEM-BUTTON:
 const removeFromList = (id, listType) => {
-    const sList = findWhichList(listType, "state");
+    const sList = whichStateList(listType);
     sList.deleteListItem(id);
     todoView.deleteItem(id);
 }
 
-const findWhichList = (liType, elemOrState) => {
-    /*     let stateList = undefined;  // ! ? Must be assigned???
-        let elemList = undefined;  // ! ? Must be assigned??? */
-    if (elemOrState == "state") {
-        let stateList = undefined;  // ! ? Must be assigned???
-        if (liType === "todo") {
-            stateList = state.todoList;
-        } else if (liType === "done") {
-            stateList = state.doneList;
-        }
-        return stateList;
 
-    } else if (elemOrState == "elem") {
-        let elemList = undefined;  // ! ? Must be assigned???
-        if (liType === "todo") {
-            elemList = elements.tasksList;
-        } else if (liType === "done") {
-            elemList = elements.doneList;
-        }
-        return elemList;
+const whichElemList = (listType) => {
+    let elemList = undefined;  // ! ? Must be assigned???
+    if (listType === "todo") {
+        elemList = elements.tasksList;
+    } else if (listType === "done") {
+        elemList = elements.doneList;
     }
+    return elemList;
 }
+
+const whichStateList = (listType) => {
+    let stateList = undefined;  // ! ? Must be assigned???
+    if (listType === "todo") {
+        stateList = state.todoList;
+    } else if (listType === "done") {
+        stateList = state.doneList;
+    }
+    return stateList;
+}
+
+
 
 
 // ! SORTING §§§§§§§§§§§§§§§
 
 const sortList = (listType, column) => {
-    elements.tasksList.innerHTML = "";
+    // elements.tasksList.innerHTML = "";
+    clearViewList(listType);
+    const sortList = whichStateList(listType);
 
     if (column == "urgency") {
-        listType.items.sort((a, b) => a.urgency - b.urgency);
-        console.log(state.todoList.items);
+
+        sList.sort((a, b) => a.urgency - b.urgency);
+        // listType.items.sort((a, b) => a.urgency - b.urgency);
     } else if (column == "name") {
-        listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
-        console.log(listType.items);
+        sList.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        // listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
     } else if (column == "tag") {
-        listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
-        console.log(listType.items);
-
+        sList.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
+        // listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
     } else if (column == "dateFrom") { // ! TODO !!!! From - not working!!!!
-        listType.items.sort((a, b) => (b.from - a.from) ? 1 : -1);
-        console.log("listtype-from:");
-        console.log(listType.items[0].from);
-        console.log(listType.items[1].from);
-        console.log(listType.items[2].from);
-        console.log(listType.items[3].from);
-        console.log(listType.items);
+        //listType.items.sort((a, b) => (b.from - a.from) ? 1 : -1);
     } else if (column == "daysRemaining" || column == "dateUntil") {
-        listType.items.sort((a, b) => (b.until - a.until) ? 1 : -1);
-        console.log(listType.items);
+        // listType.items.sort((a, b) => (b.until - a.until) ? 1 : -1);
     }
 
-    state.todoList.items.forEach(el => {
-        console.log("forEach el:");
-        console.log(el);
+    //const sList = findWhichList(listType, "state");
 
-        //const sList = findWhichList(listType, "state");
-
+    listType.items.forEach(el => {
         //todoView.renderItem(sList.items)
         const newMarkup = todoView.renderItem(el);
-        console.log("newMarkup");
-
-
         elements.tasksList.insertAdjacentHTML("beforeend", newMarkup);
     })
 
@@ -299,31 +318,6 @@ const restrictPastDates = () => {
     elements.taskUntil.setAttribute('min', today);
 }
 
-/* const createNewListView = () => { // ! 
-    createListMarkup("todo");
-    createListMarkup("done");
-} */
-
-
-
-/* const sortListUrgency = (listType) => {
-    listType.items.sort((a, b) => a.urgency - b.urgency);
-    console.log("sorted-urgency:++++++++++++++");
-    console.log(state.todoList.items);
-}
- 
-const sortListName = (listType) => {
-    listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    console.log("sorted-name:++++++++++++++");
-    console.log(listType.items);
-}
- 
-const sortListTag = (listType) => {
-    listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
-    console.log("sorted-tag:++++++++++++++");
-    console.log(listType.items);
-}
- */
 
 // INITIALIZATION FUNCTION:
 const init = () => {

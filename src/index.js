@@ -10,6 +10,7 @@ import TodoList from "./js/models/TodoList";
 import * as todoView from "./js/views/todoView";
 
 const state = {
+
 };
 
 // SETUP EVENT LISTENERS:
@@ -33,22 +34,27 @@ const setupEventListeners = () => {
         todoView.clearInput();
         console.log("AddBtn state:");
         console.log(state);
+        //updateListsStorage(); // ! 
+        //console.log(localStorage.todoDoneLists); // ! 
     });
 
     // REACTION ON CLICKING DELETE-ALL-LISTS BUTTON
     elements.deleteListsBtnAll.addEventListener("click", () => {
         removeList("done");   // remove from state and DOM
         removeList("todo");   // remove from state and DOM
+        //updateListsStorage(); // ! 
     });
 
     // REACTION ON CLICKING DELETE-TODO-LIST BUTTON
     elements.deleteListsBtnTodo.addEventListener("click", () => {
         removeList("todo");   // remove from state and DOM
+        //updateListsStorage();  // ! 
     });
 
     // REACTION ON CLICKING DELETE-DONE-LIST BUTTON
     elements.deleteListsBtnDone.addEventListener("click", () => {
         removeList("done");   // remove from state and DOM
+        //updateListsStorage();  // ! 
     });
 
     // ! REACTION ON CLICKING THE ICON => SORTING ITEMS
@@ -78,6 +84,7 @@ const setupEventListeners = () => {
                 sortList(state.todoList, "daysRemaining");
                 console.log("**** daysRemaining icon clicked");
             }
+            // ! createNewListView();
         }
     })
 
@@ -105,6 +112,7 @@ const setupEventListeners = () => {
                 sortList(state.doneList, "daysRemaining");
                 console.log("**** daysRemaining icon clicked");
             }
+            // ! createNewListView();
         }
     })
 
@@ -124,13 +132,14 @@ const setupEventListeners = () => {
 
             // REACTION TO CHECKING / UCHECKING THE CHECKBOX
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked)) {
-            if (!state.doneList) state.doneList = new TodoList();
+            if (!state.doneList) state.doneList = new TodoList(); // ! 
             moveItem(tagId, "todo", "done");
 
         } else if (e.target.matches(".item__checkbox--btn") && (e.target.checked === false)) {
             if (!state.todoList) state.todoList = new TodoList();
             moveItem(tagId, "done", "todo");
         }
+        //updateListsStorage();  // ! 
     })
 }
 
@@ -152,10 +161,31 @@ const removeList = (listType) => {
 }
 
 const addToTodoList = () => {
-    if (!state.todoList) state.todoList = new TodoList();
+    if (!state.todoList) state.todoList = new TodoList(); // ! 
     addFromFormToTodoState();       // add to state.todoList as a new item
     createListMarkup("todo");
 }
+
+const createLists = () => {
+    if (localStorage.getItem("todoDoneLists")) {
+        JSON.parse(localStorage.getItem("todoDoneLists"));
+        //const todoListStorage = state.todoList;
+        //const doneListStorage = state.doneList;
+        //createListMarkup("todo");  // ! 
+        //createListMarkup("done");  // ! 
+    }
+    if (!state.todoList) state.todoList = new TodoList();
+    if (!state.doneList) state.doneList = new TodoList();
+    console.log("state after loclaStorage.getItem:");
+    console.log(state);
+
+}
+
+/* const updateListsStorage = () => {  // ! 
+    localStorage.setItem("todoDoneLists", JSON.stringify(state));
+    console.log("LocalStorage:");  // ! 
+    console.log(localStorage.todoDoneLists);  // ! 
+} */
 
 const addFromFormToTodoState = () => {
     const dateFrom = new Date().getTime();
@@ -169,6 +199,7 @@ const addFromFormToTodoState = () => {
         timestampUntil,
         elements.taskUrgency.value
     );
+
 }
 
 const switchChecked = (item) => {
@@ -217,12 +248,15 @@ const findWhichList = (liType, elemOrState) => {
 // ! SORTING §§§§§§§§§§§§§§§
 
 const sortList = (listType, column) => {
+    elements.tasksList.innerHTML = "";
+
     if (column == "urgency") {
         listType.items.sort((a, b) => a.urgency - b.urgency);
         console.log(state.todoList.items);
     } else if (column == "name") {
         listType.items.sort((a, b) => (a.name > b.name) ? 1 : -1);
         console.log(listType.items);
+
     } else if (column == "tag") {
         listType.items.sort((a, b) => (a.tag > b.tag) ? 1 : -1);
         console.log(listType.items);
@@ -240,19 +274,24 @@ const sortList = (listType, column) => {
         console.log(listType.items);
     }
 
+    state.todoList.items.forEach(el => {
+        console.log("forEach el:");
+        console.log(el);
+
+        //const sList = findWhichList(listType, "state");
+
+        //todoView.renderItem(sList.items)
+        const newMarkup = todoView.renderItem(el);
+        console.log("newMarkup");
+
+
+        elements.tasksList.insertAdjacentHTML("beforeend", newMarkup);
+    })
+
 }
 
 const setUntilDate = () => {
-    //setTodayDate();
     restrictPastDates();
-}
-
-const setTodayDate = () => {
-    // elements.taskUntil.value = new Date().toDateInputValue();
-    elements.taskUntil.valueAsDate = new Date();
-    //let today = new Date().toISOString().substr(0, 10);
-    //elements.taskUntil.setAttribute('value', today);
-    //elements.taskUntil.value = today;
 }
 
 const restrictPastDates = () => {
@@ -260,7 +299,10 @@ const restrictPastDates = () => {
     elements.taskUntil.setAttribute('min', today);
 }
 
-
+/* const createNewListView = () => { // ! 
+    createListMarkup("todo");
+    createListMarkup("done");
+} */
 
 
 
@@ -286,6 +328,9 @@ const sortListTag = (listType) => {
 // INITIALIZATION FUNCTION:
 const init = () => {
     console.log("App has started");
+    //console.log("LocalStorage:"); // ! 
+    //console.log(localStorage.todoDoneLists); // ! 
+    //createLists();  // ! added
     setupEventListeners();
     todoView.clearInput();
     setUntilDate();

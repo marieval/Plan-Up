@@ -30,9 +30,11 @@ export const renderItem = (todoItem) => {
             <div class="item__dateUntil">${dayUntil}</div>
             <div class="item__daysRemaining">${daysBetween} days</div>
             <button class="item__delete--btn">Delete</button>
-            <button class="item__edit--btn">Edit</button>
-        </div>    
-    `;
+            </div>    
+            `;
+    /* - MOVED FROM MARKUP <button class="item__edit--btn">Edit</button> */
+
+
     return markup;
     // elements.items.insertAdjacentHTML("beforeend", markup);
 }

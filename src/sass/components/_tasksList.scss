@@ -96,6 +96,11 @@
     background-color: rgba($color-light, 0.2);
     width: 100%;
     margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+
+        border-radius: 5px;
+        font-size: 1.4rem;
+
 
     & > * {
         margin-left: 0.75rem;
@@ -103,6 +108,11 @@
         padding: 0.25rem 0.5rem;
         background-color: $color-light;
         flex: 0 1 auto;
+
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 1.4rem;
+
     }
 
     /* &__checkbox--btn {
@@ -131,9 +141,10 @@
         flex: 0 1 10%;
     }
 
-    &__delete--btn,
-    &__edit--btn {
-        background-color: $color-tertiary;
+    /* &__edit--btn, */
+    &__delete--btn
+         {
+        background-color: $color-primary-light;
     }
 }
 

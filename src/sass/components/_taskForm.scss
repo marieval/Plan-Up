@@ -60,18 +60,18 @@
     &__input {
         //width: 100%;
         border: 1px solid $color-primary-dark;
-        border-radius: 1px;
+        border-radius: 5px;
         caret-color: $color-secondary;
-        padding: 2px;
-        font-size: 1.2rem;
+        padding: 5px 10px;
+        font-size: 1.4rem;
 
         &--until {
-            width: 10rem;
+            /* width: 10rem; */
         }
 
         &--urgency {
             width: 100%;
-            width: 8rem;
+           /*  width: 8rem; */
         }
     }
 }
